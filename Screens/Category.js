@@ -1,0 +1,74 @@
+import { useNavigation } from "@react-navigation/native";
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+
+const Category=()=> {
+
+    const categoryList= [
+        {id: 1, name: 'House', url: 'https://static.vecteezy.com/system/resources/thumbnails/026/586/056/small/beautiful-modern-house-exterior-with-carport-modern-residential-district-and-minimalist-building-concept-by-ai-generated-free-photo.jpg'},
+        {id: 2, name: 'Villa', url: 'https://cdn.confident-group.com/wp-content/uploads/2025/01/09175702/villa-cover.jpg'},
+        {id: 3, name: 'Apartment', url: 'https://assets-news.housing.com/news/wp-content/uploads/2022/03/28143140/Difference-between-flat-and-apartment.jpg'},
+        {id: 4, name: 'Bungalow', url: 'https://www.decorpot.com/images/blogimage473847886what-is-bungalow-house-design.jpg'},
+        {id: 5, name: 'Duplex', url: 'https://i.pinimg.com/736x/65/b2/f2/65b2f2ad82c49d9e24d23736938c0355.jpg'},
+        {id: 6, name: 'Commercial', url: 'https://img.staticmb.com/mbcontent/images/crop/uploads/2024/10/Exterior-of-Phoenix-Mall-of-the-Millennium-lighted-up-at-night_0_1200.jpg.webp'},
+        {id: 7, name: 'Semi-Commercial', url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXMhwmZVWWr37iL3oIVxSRZ2QWO9WJw_--Ig&s'}
+    ];
+
+    const navigation= useNavigation();
+
+    return (
+        <View style={styles.mainContainer}>
+            <Text style={styles.residencialTxt}>Design Category</Text>
+            <FlatList
+                data={categoryList}
+                renderItem={({ item })=> (
+                    <TouchableOpacity style={styles.categoryBox} onPress={()=> navigation.navigate('Home', {screen: 'AllProduct', params: {product: item}})}>
+                        <Image style={styles.categoryImg} source={{uri : item.url }}/>
+                        <Text style={{marginTop: 5}}>{item.name}</Text>
+                    </TouchableOpacity>
+                )}
+                keyExtractor={(item)=> item.id}
+                numColumns={2}
+                showsVerticalScrollIndicator={false}
+            />
+        </View>
+    )
+};
+
+const styles= StyleSheet.create({
+    mainContainer:{
+        flex: 1,
+        backgroundColor: 'white',
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    categoryBox:{
+        width: 150,
+        height: 130,
+        borderRadius: 10,
+        backgroundColor: '#1eef4',
+        margin: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    categoryImg:{
+        width: '100%',
+        height: 100,
+        overflow: 'hidden',
+        resizeMode: 'cover',
+        borderRadius: 10
+    },
+
+    residencialTxt:{
+        fontSize: 16,
+        fontWeight: '600',
+        margin: 10,
+        color: 'blue',
+        alignSelf: 'flex-start'
+    },
+
+});
+
+export default Category;
