@@ -9,7 +9,7 @@ const PackageBox= ({ item, color, isSelected, onPress })=> {
 
     return (
         <TouchableOpacity onPress= { onPress } style= {[styles.box, {backgroundColor: color}, isSelected && styles.selectedBox ]}>
-            <View style={{padding: 5 }}>
+            <View>
                 <Text style={styles.packageName}>{item.name}</Text>
                 <Text style={styles.packagePrice}>Price: ₹ {item.price} </Text>
             </View>
@@ -30,26 +30,27 @@ const PackageBox= ({ item, color, isSelected, onPress })=> {
 
 const styles = StyleSheet.create({
     box:{
-        width: 170,
+        width: '45%',
         height: 80,
         borderRadius: 15,
-        padding: 10,
+        padding: 8,
         margin: 8,
         alignSelf: 'center',
         justifyContent: 'space-between',
+        alignItems: 'center',
         flexDirection: 'row',
     },
 
     packageName:{
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '500',
-        color: 'white'
+        color: '#FFFFFF'
     },
 
     packagePrice:{
         fontSize: 16,
         fontWeight: '400',
-        color: 'white'
+        color: '#E8F0FA',
     },
 
     arrowBtn:{
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
 
     modal:{
         flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.8)',
+        backgroundColor: 'rgba(0,0,0,0.5)',
         justifyContent: 'center',
         alignItems: 'center',
     },

@@ -19,24 +19,26 @@ const styles= StyleSheet.create({
     searchBox:{
         width: '100%',
         height: 50,
-        backgroundColor: 'white',
-        borderRadius: 15,
-        elevation: 5,
+        backgroundColor: '#ffffff',
+        borderRadius: 24,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
         flexDirection: 'row',
         marginBottom: 10
     },
 
     input:{
+        alignItems: 'center',
         fontSize: 16,
         margin: 5,
-        fontStyle: 'italic',
-        color: 'black'
+        color: '#1A2233',
     },
 
     searchIcon:{
-        marginLeft: 10,
+        marginLeft: 18,
         fontSize: 18,
-        marginTop: 15
+        alignSelf: 'center',
+        color: '#B0B8C9'
     }
 
 });

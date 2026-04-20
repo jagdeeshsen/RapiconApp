@@ -8,7 +8,7 @@ const CustomBackBtn=({ screen })=>{
 
     return (
         <TouchableOpacity style={styles.container} onPress={()=> navigation.navigate(screen)}>
-            <Icon name="chevron-back" size={22} color='#000' fontWeight={600}/>
+            <Icon name="chevron-back" size={22} color='#1A3A5C' fontWeight={600}/>
         </TouchableOpacity>
 
     );
@@ -19,7 +19,6 @@ const styles=StyleSheet.create({
         width: 30,
         height: 30,
         borderRadius: 10,
-        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },

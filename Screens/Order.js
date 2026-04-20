@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, FlatList, StatusBar, StyleSheet, Text, View } from "react-native"
 import OrderHistoryBox from "../Components/OrderHistoryBox";
 import { checkToken, getAuthData } from "../utils/authStorage";
 import { orderService } from "../Service/orderService";
 import ErrorMessage from "../Components/ErrorMessage";
 import PhonePePaymentSDK from 'react-native-phonepe-pg';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const MERCHANT_ID = 'M232LIX7SOZLM';
 const ENVIRONMENT = 'PRODUCTION';
@@ -177,21 +178,21 @@ const Order= ({ setIsLoggedIn})=>{
 
 
     return (
-        <FlatList
-            data={orders} 
-            renderItem={ ({ item }) => <OrderHistoryBox item={item} installmentCheckout = {handleInstallmentCheckout} payingId={payingId}/>}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.container}
-            ListEmptyComponent={loading ? <ActivityIndicator size='large' style= {styles.activityIndicator}/> : <ErrorMessage textMessage='You have not placed any orders yet.'/>}>
-        </FlatList>
+        <SafeAreaView style={{flex:1, backgroundColor: '#F8F9FB'}}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+            <FlatList
+                data={orders} 
+                renderItem={ ({ item }) => <OrderHistoryBox item={item} installmentCheckout = {handleInstallmentCheckout} payingId={payingId}/>}
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{padding: 10}}
+                ListEmptyComponent={loading ? <ActivityIndicator size='large' style= {styles.activityIndicator}/> : <ErrorMessage textMessage='You have not placed any orders yet.'/>}>
+            </FlatList>
+        </SafeAreaView>
     );
 };
 
 const styles= StyleSheet.create({
-    container:{
-        backgroundColor: '#f8f8f8',
-    },
 
     activityIndicator:{
         justifyContent: 'center',

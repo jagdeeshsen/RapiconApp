@@ -1,13 +1,11 @@
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { StyleSheet, Text, View } from "react-native";
 
-const DesignInfoBox = ({ title, icon, quantity }) => {
+const DesignInfoBox = ({ title, quantity }) => {
 
     return (
         <View style={styles.Box}>
-            <MaterialCommunityIcons name={icon} size={24} color='#000'/>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.quantity}>{quantity}</Text>
+            <Text style={styles.label}>{title}</Text>
+            <Text style={styles.value}>{quantity}</Text>
         </View>
     );
 };
@@ -15,23 +13,25 @@ const DesignInfoBox = ({ title, icon, quantity }) => {
 const styles = StyleSheet.create({
     Box:{
         width: 100,
-        height: 100,
-        backgroundColor: '#fff',
-        borderRadius: 8,
+        height: 80,
+        backgroundColor: '#E8F0FA',
+        borderRadius: 12,
         marginRight: 12,
         padding: 10,
         alignItems: 'center'
     },
 
-    title:{
+    label:{
         fontSize: 14,
-        fontWeight: '500',
+        fontWeight: '400',
         marginBottom: 5,
+        color: '#6B7A99',
     },
 
-    quantity:{
+    value:{
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '500',
+        color: '#1A2233',
     },
 });
 

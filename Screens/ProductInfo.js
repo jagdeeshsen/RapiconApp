@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import ImageCarousel from "../Components/ImageCarousel";
 import CustomBtn from "../Components/CustomBtn";
 import { useNavigation } from "@react-navigation/native";
@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ProductService } from "../Service/ProductService";
 import DesignInfoBox from "../Components/DesignInfoBox";
 import FloorPlan from "../Components/FloorPlan";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const ProductInfo=({ route })=>{
@@ -69,11 +70,14 @@ const ProductInfo=({ route })=>{
     };
 
     return (
-      
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.wrapperContainer}>
+      <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+        <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
+
           <ImageCarousel urls = {imageUrls}/>
+
           <View style={styles.contentBox}>
-            <Text style={styles.descriptionText}>
+            <Text style={styles.categoryBadge}>
               {product.designType === 'Residential' ? product.designCategory : product.designType}
             </Text>
             <Text style={styles.priceText}>
@@ -83,52 +87,52 @@ const ProductInfo=({ route })=>{
 
           <Text style={styles.heading}>Description:</Text>
 
-          <View style={styles.productInfoWrapper}>
+          <View>
             <View style={styles.infoBox}>
-              <Text>Design Name :</Text>
-              <Text> {product.designType === 'Residential' ? product.designCategory : product.designType}</Text>
+              <Text style={styles.fieldLabel}>Design Name :</Text>
+              <Text style={styles.fieldValue}> {product.designType === 'Residential' ? product.designCategory : product.designType}</Text>
             </View>
             <View style={styles.infoBox}>
-              <Text> Design Type :</Text>
-              <Text> {product.designType}</Text>
+              <Text style={styles.fieldLabel}> Design Type :</Text>
+              <Text style={styles.fieldValue}> {product.designType}</Text>
             </View>
             <View style={styles.infoBox}>
-              <Text> Plot Size :</Text>
-              <Text> {product.width}X{product.length}</Text>
+              <Text style={styles.fieldLabel}> Plot Size :</Text>
+              <Text style={styles.fieldValue}> {product.width}X{product.length}</Text>
             </View>
             <View style={styles.infoBox}>
-              <Text> Total Area :</Text>
-              <Text> {product.totalArea}</Text>
+              <Text style={styles.fieldLabel}> Total Area :</Text>
+              <Text style={styles.fieldValue}> {product.totalArea}</Text>
             </View>
             <View style={styles.infoBox}>
-              <Text> Built-up Area :</Text>
-              <Text> {product.builtUpArea}</Text>
+              <Text style={styles.fieldLabel}> Built-up Area :</Text>
+              <Text style={styles.fieldValue}> {product.builtUpArea}</Text>
             </View>
             <View style={styles.infoBox}>
-              <Text> Plot Facing :</Text>
-              <Text> {product.plotFacing}</Text>
+              <Text style={styles.fieldLabel}> Plot Facing :</Text>
+              <Text style={styles.fieldValue}> {product.plotFacing}</Text>
             </View>
             <View style={styles.infoBox}>
-              <Text> Plot Location :</Text>
-              <Text> {product.plotLocation || 'Center'}</Text>
+              <Text style={styles.fieldLabel}> Plot Location :</Text>
+              <Text style={styles.fieldValue}> {product.plotLocation || 'Center'}</Text>
             </View>
           </View>
 
-          <Text style={styles.heading}>Floor Details</Text>
+          <Text style={styles.heading}>Floor Details:</Text>
 
-          <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 10,}}>
-            <DesignInfoBox title='Floor' icon='layers' quantity={floorArr.length}/>
-            <DesignInfoBox title='Bedroom' icon='bed' quantity={totals.bedrooms}/>
-            <DesignInfoBox title='Bathroom' icon='shower' quantity={totals.bathrooms}/>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10, alignItems: 'center'}}>
+            <DesignInfoBox title='Floor' quantity={floorArr.length}/>
+            <DesignInfoBox title='Bedroom' quantity={totals.bedrooms}/>
+            <DesignInfoBox title='Bathroom' quantity={totals.bathrooms}/>
           </View>
 
-          <View style={{flexDirection: 'row', justifyContent: 'center', marginBottom: 10}}>
-            <DesignInfoBox title='Kitchen' icon='silverware-fork-knife' quantity={totals.kitchen}/>
-            <DesignInfoBox title='Hall' icon='sofa' quantity={totals.hall}/>
-            <DesignInfoBox title={product.parking} icon='car-outline'/>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10, alignItems: 'center'}}>
+            <DesignInfoBox title='Kitchen' quantity={totals.kitchen}/>
+            <DesignInfoBox title='Hall' quantity={totals.hall}/>
+            <DesignInfoBox title='Parking' quantity={product.parking} />
           </View>
 
-          <Text style={styles.heading}>Floor Plan</Text>
+          <Text style={styles.heading}>Floor Plan:</Text>
 
           <View style={styles.floorPlan}>
             { product.twoDPlanUrls?.map((url, index) => (
@@ -140,18 +144,12 @@ const ProductInfo=({ route })=>{
             <CustomBtn title={'See Plans'} onPress={()=> navigation.navigate('Package Details', {itemId : product.id})} />
           </View>
         </ScrollView>
+      </SafeAreaView>
       
     );
 };
 
 const styles= StyleSheet.create({
-  wrapperContainer:{
-    backgroundColor: '#f8f8f8',
-  },
-
-  productInfoWrapper:{
-    alignItems: 'center',
-  },
 
   infoText:{
     fontSize: 18,
@@ -160,13 +158,37 @@ const styles= StyleSheet.create({
     color: 'blue'
   },
 
+  categoryBadge: {
+    bottom: 8,
+    left: 8,
+    backgroundColor: '#1A3A5C',
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 4,
+  },
+
   infoBox:{
-    width: '90%',
-    height: 'auto',
-    padding:8,
+    padding: 8,
     flexDirection: 'row',
-    marginBottom: 8,
     justifyContent: 'space-between',
+    borderWidth: 0.5,
+    borderColor: '#E2E8F0',
+    borderRadius: 10,
+  },
+
+  fieldLabel:{
+    color: '#6B7A99',
+    fontSize: 13,
+    fontWeight: '400',
+  },
+
+  fieldValue:{
+    color: '#1A2233',
+    fontSize: 13,
+    fontWeight: '500',
   },
 
   bottomWrapper:{
@@ -176,7 +198,7 @@ const styles= StyleSheet.create({
     alignItems: 'baseline',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: 10,
   },
 
   descriptionText:{
@@ -186,26 +208,27 @@ const styles= StyleSheet.create({
 
   contentBox:{
     flexDirection: 'row',
-    padding: 10,
+    padding: 8,
     justifyContent: 'space-between',
   },
 
   priceText:{
-    fontWeight: 'bold',
+    fontWeight: '500',
     fontSize: 16,
+    color: '#D4A017'
   },
 
   heading:{
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#1A3A5C',
     marginStart: 10,
-    marginBottom: 10,
+    marginBottom: 8,
   },
 
   floorPlan:{
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
   },
 
   errorMsg:{

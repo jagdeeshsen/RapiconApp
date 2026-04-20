@@ -1,8 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View, TextInput } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, StatusBar } from "react-native";
 import CustomBackBtn from "../Components/CustomBackBtn";
 import { useEffect, useState } from "react";
 import { userService } from "../Service/UserService";
 import { saveAuthData } from "../utils/authStorage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const OTPScreen= ({ route, setIsLoggedIn })=> {
 
@@ -81,13 +82,14 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
     const isOTPValid= otp.length === 6;
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <View style={styles.backBtn}>
                 <CustomBackBtn screen='Sign In'/>
             </View>
             <Text style={styles.heading}>Varify OTP</Text>
             <Text style={styles.subHeading}>We’ve sent a one-time password to your{' '}
-                <Text style={{fontWeight: '800'}}>{phone}</Text> {' '}number.</Text>
+                <Text style={{fontWeight: '600', color: '#1A3A5C'}}>{phone}</Text> {' '}number.</Text>
             <Text style={styles.mainHeading}>OTP *</Text>
             <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#ffffff'}]}>
                 <TextInput 
@@ -103,23 +105,23 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
             ) : null }
 
             <TouchableOpacity 
-                style={[styles.registerBtn, { backgroundColor: isOTPValid ? 'green' : '#ccc'}]}
+                style={[styles.registerBtn, { backgroundColor: isOTPValid ? '#1A3A5C' : '#FFFFFF'}]}
                 onPress={handleVarifyOTP}
                 disabled= {!isOTPValid}
             >
-                <Text style={styles.btnText}>Varify</Text>
+                <Text style={[styles.btnText, {color: isOTPValid ? '#FFFFFF' : '#1A3A5C'}]}>Varify</Text>
             </TouchableOpacity>
 
             <View style={styles.TAndCContainer}>
-                <Text>Didn't recieve the OTP? </Text>
+                <Text style={{color: '#1A2233'}}>Didn't recieve the OTP? </Text>
                 <TouchableOpacity 
                     onPress={handleResendOTP}
                     disabled={isResendDisabled}>
-                    <Text style={[styles.clickableText, {color: isResendDisabled ? 'gray' : 'darkgreen'}]}>
+                    <Text style={[styles.clickableText, {color: isResendDisabled ? '#E8F0FA' : '#1A3A5C'}]}>
                         { isResendDisabled ? `Resend in ${timer}s` : 'Resend OTP'}</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -128,7 +130,7 @@ const styles= StyleSheet.create({
         flex: 1,
         padding: 20,
         alignItems: 'center',
-        backgroundColor: '#f6f8fa',
+        backgroundColor: '#F8F9FB',
     },
 
     inputContainer:{
@@ -156,15 +158,16 @@ const styles= StyleSheet.create({
     },
 
     heading:{
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: '700',
         textAlign: 'center',
         margin: 5,
+        color: '#1A2233',
     },
 
     subHeading:{
         fontSize: 13,
-        color: '#555',
+        color: '#1A2233',
         textAlign: 'center',
         marginBottom: 30,
     },
@@ -179,7 +182,6 @@ const styles= StyleSheet.create({
     btnText:{
         fontSize: 18,
         fontWeight: '700',
-        color: 'white',
     },
 
     errorText:{
@@ -200,8 +202,7 @@ const styles= StyleSheet.create({
 
     clickableText:{
         fontSize: 14,
-        fontWeight: '300',
-        color: 'darkgreen',
+        fontWeight: '700',
     },
 });
 

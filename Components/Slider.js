@@ -16,7 +16,7 @@ const styles= StyleSheet.create({
         width: '100%',
         height: 180,
         backgroundColor: 'white',
-        borderRadius: 15,
+        borderRadius: 18,
         alignSelf: 'center',
         marginTop: 15
     },
@@ -25,7 +25,7 @@ const styles= StyleSheet.create({
         width: '100%',
         height: 180,
         overflow: 'hidden',
-        borderRadius: 15
+        borderRadius: 18
     },
 
 });

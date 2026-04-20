@@ -45,14 +45,14 @@ const ImageCarousel=({ urls })=>{
 
 const styles= StyleSheet.create({
     wrapperContainer:{
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#F8F9FB',
     },
 
     dotsContainer:{
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 10,
-        marginBottom: 10,
+        marginBottom: 8,
     },
 
     dot:{
@@ -64,7 +64,7 @@ const styles= StyleSheet.create({
     },
 
     activeDot:{
-        backgroundColor: '#000'
+        backgroundColor: '#1A3A5C'
     },
 
 });

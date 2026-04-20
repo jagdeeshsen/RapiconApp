@@ -1,9 +1,10 @@
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Linking, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import IntputBox from "../Components/InputBox";
 import { useNavigation } from "@react-navigation/native";
 import CustomBackBtn from "../Components/CustomBackBtn";
 import { userService } from "../Service/UserService";
 import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignUp= ()=>{
 
@@ -76,7 +77,8 @@ const SignUp= ()=>{
     const isFormValid= form.person && form.email && form.phone && agreed && !errors.email && !errors.phone && !errors.person;
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <View style={styles.backBtn}>
                 <CustomBackBtn screen='Welcome Screen'/>
             </View>
@@ -115,10 +117,10 @@ const SignUp= ()=>{
 
             <View style={styles.TAndCContainer}>
                 <TouchableOpacity 
-                    style={[styles.checkBox, agreed && { backgroundColor: 'green', borderColor: 'green' }]}
+                    style={[styles.checkBox, agreed && { backgroundColor: '#1A3A5C', borderColor: '#E2E8F0' }]}
                     onPress={() => setAgreed(prev=> !prev)}
                 >
-                    {agreed && <Text style={{ color: '#fff', fontSize: 16 }}>✓</Text>}
+                    {agreed && <Text style={{ color: '#FFFFFF', fontSize: 16 }}>✓</Text>}
                 </TouchableOpacity>
 
 
@@ -126,7 +128,7 @@ const SignUp= ()=>{
                 <TouchableOpacity onPress={()=> Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}>
                     <Text style={styles.clickableText}> Terms of Service </Text>
                 </TouchableOpacity>
-                <Text> and </Text>
+                <Text style={styles.TAndCText}> and </Text>
                 <TouchableOpacity onPress={()=> Linking.openURL('https://rapiconinfra.com/privacy-policy.html')}>
                     <Text style={styles.clickableText}> Privacy Policy. </Text>
                 </TouchableOpacity>
@@ -134,20 +136,20 @@ const SignUp= ()=>{
             </View>
 
             <TouchableOpacity 
-                style={[styles.registerBtn, {backgroundColor: isFormValid ? 'green' : '#ccc'}]}
+                style={[styles.registerBtn, {backgroundColor: isFormValid ? '#1A3A5C' : '#FFFFFF'}]}
                 disabled={!isFormValid}
                 onPress={handleOnCreateUser}>
-                <Text style={styles.btnText}>Create Account</Text>
+                <Text style={[styles.btnText, {color: isFormValid ? '#FFFFFF' : '#1A3A5C'}]}>Create Account</Text>
             </TouchableOpacity>
 
             <View style={styles.TAndCContainer}>
-                <Text>Already have an account? </Text>
+                <Text style={styles.TAndCText}>Already have an account? </Text>
                 <TouchableOpacity onPress={()=> navigation.navigate('Sign In')}>
                     <Text style={styles.clickableText}>Sign in here</Text>
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -157,7 +159,7 @@ const styles= StyleSheet.create({
         paddingHorizontal: 20,
         padding: 20,
         alignItems: 'center',
-        backgroundColor: '#f6f8fa',
+        backgroundColor: '#F8F9FB',
     },
 
     TAndCContainer:{
@@ -173,24 +175,26 @@ const styles= StyleSheet.create({
         paddingHorizontal: 24,
         borderRadius: 10,
         opacity:  1,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
     },
 
     btnText:{
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '700',
-        color: 'white',
     },
 
     heading:{
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: '700',
         textAlign: 'center',
         margin: 5,
+        color: '#1A2233'
     },
 
     subHeading:{
         fontSize: 13,
-        color: '#555',
+        color: '#1A2233',
         textAlign: 'center',
         marginBottom: 30,
     },
@@ -209,12 +213,13 @@ const styles= StyleSheet.create({
     TAndCText:{
         fontSize: 14,
         fontWeight: '400',
+        color: '#1A2233',
     },
 
     clickableText:{
         fontSize: 14,
-        fontWeight: '300',
-        color: 'green',
+        fontWeight: '700',
+        color: '#1A3A5C',
     },
 
     mainHeading:{
@@ -223,6 +228,7 @@ const styles= StyleSheet.create({
         alignSelf: 'flex-start',
         marginStart: 20,
         marginBottom: 5,
+        color: '#1A2233',
     },
 
     backBtn:{

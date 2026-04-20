@@ -17,50 +17,50 @@ const CartListFooter=({ price, onCheckout, onInstallmentCheckout, paying })=>{
                 <Text style={styles.headingText}>Order Summary:</Text>
 
                 <View style={styles.detailComponent}>
-                    <Text>Subtotal:</Text>
-                    <Text> ₹ {formatePrice(price)}</Text>
+                    <Text style={styles.fieldLabel}>Subtotal:</Text>
+                    <Text style={styles.fieldValue}> ₹ {formatePrice(price)}</Text>
                 </View>
 
                 <View style={styles.detailComponent}>
-                    <Text>Tax (18%):</Text>
-                    <Text> ₹ {formatePrice(tax)}</Text>
+                    <Text style={styles.fieldLabel}>Tax (18%):</Text>
+                    <Text style={styles.fieldValue}> ₹ {formatePrice(tax)}</Text>
                 </View>
 
                 <View style={styles.line}/>
 
                 <View style={styles.detailComponent}>
-                    <Text>Total:</Text>
-                    <Text> ₹ {formatePrice(total)}</Text>
+                    <Text style={styles.fieldValue}>Total:</Text>
+                    <Text style={styles.fieldValue}> ₹ {formatePrice(total)}</Text>
                 </View>
 
                 <View style={styles.detailComponent}>
-                    <Text>Installment:</Text>
-                    <Text> ₹ {formatePrice(total/10)}</Text>
+                    <Text style={styles.fieldLabel}>Installment:</Text>
+                    <Text style={styles.installmentPrice}> ₹ {formatePrice(total/10)} /mo</Text>
                 </View>
                 
             </View>
             
             <TouchableOpacity
-                style={[styles.customBtn, paying && styles.customBtnDisabled]}
+                style={[styles.primaryBtn, paying && styles.customBtnDisabled]}
                 onPress={onCheckout}
                 disabled={paying}
                 activeOpacity={0.8}
             >
                 {paying
                     ? <ActivityIndicator color="white" />
-                    : <Text style={styles.btnText}>Pay Now</Text>
+                    : <Text style={styles.primaryBtnText}>Pay Now</Text>
                 }
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={[styles.customBtn, paying && styles.customBtnDisabled]}
+                style={[styles.secondaryBtn, paying && styles.customBtnDisabled]}
                 onPress={onInstallmentCheckout}
                 disabled={paying}
                 activeOpacity={0.8}
             >
                 {paying
                     ? <ActivityIndicator color="white" />
-                    : <Text style={styles.btnText}>Pay in Installment</Text>
+                    : <Text style={styles.secondaryBtnText}>Pay Installment</Text>
                 }
             </TouchableOpacity>
             
@@ -79,51 +79,91 @@ const styles= StyleSheet.create({
     orderSummary:{
         width: '95%',
         height: 'auto',
-        backgroundColor: 'white',
+        backgroundColor: '#F8F9FB',
         margin: 10,
-        padding: 10,
+        padding: 8,
         alignSelf: 'center',
         borderRadius: 15,
-        
+        borderWidth: 1,
+        borderColor: '#E2E8F0'
     },
 
     detailComponent:{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        margin: 10
+        margin: 8
+    },
+
+    fieldLabel:{
+        color: '#6B7A99',
+        fontSize: 13,
+        fontWeight: '400',
+    },
+
+    fieldValue:{
+        color: '#1A2233',
+        fontSize: 13,
+        fontWeight: '500',
+    },
+
+    installmentPrice:{
+        fontSize: 13,
+        fontWeight: '500',
+        color: '#1A3A5C',
     },
 
     headingText:{
         fontSize: 16,
-        fontWeight: '700',
+        fontWeight: '500',
         alignSelf: 'flex-start',
+        color: '#1A2233',
     },
 
     line:{
         width:'100%',
         height: 1,
-        backgroundColor: '#ccc',
+        backgroundColor: '#E2E8F0',
         marginVertical: 10
     },
 
-    customBtn:{
+    primaryBtn:{
         width: '95%',
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'royalblue',
+        backgroundColor: '#1A3A5C',
         borderRadius: 10,
         marginBottom: 10,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+
+    secondaryBtn:{
+        width: '95%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+        borderRadius: 10,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: '#1A3A5C',
     },
 
     customBtnDisabled: {
         opacity: 0.6,
     },
 
-    btnText:{
+    primaryBtnText:{
         fontSize: 16,
         fontWeight: '600',
-        color: 'white'
+        color: '#FFFFFF',
+    },
+
+    secondaryBtnText:{
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#1A3A5C',
     },
 
 });

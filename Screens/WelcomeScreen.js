@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import { ImageBackground, Text, TouchableOpacity } from "react-native";
+import { ImageBackground, StatusBar, Text, TouchableOpacity } from "react-native";
 import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 const WelcomeScreen= ()=> {
@@ -8,7 +9,8 @@ const WelcomeScreen= ()=> {
     const navigation= useNavigation();
 
     return(
-        <View style={styles.imageContainer}>
+        <SafeAreaView style={styles.imageContainer}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <ImageBackground style={styles.image} source={require('../assets/rapicon-welcome-screen.png')}>
 
                 <View style={styles.overlay}>
@@ -30,7 +32,7 @@ const WelcomeScreen= ()=> {
                 </View>
                 
             </ImageBackground>
-        </View>
+        </SafeAreaView>
     );
 };
 

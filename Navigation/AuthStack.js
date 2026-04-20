@@ -9,7 +9,7 @@ const Stack= createNativeStackNavigator();
 
 const AuthStack = ({ setIsLoggedIn }) => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="Welcome Screen" component={WelcomeScreen} options={{headerShown: false, statusBarHidden: true}}/>
+    <Stack.Screen name="Welcome Screen" component={WelcomeScreen} options={{headerShown: false}}/>
     <Stack.Screen name="Sign In" component={SignIn} options={{headerShown: false}}/>
     <Stack.Screen name="Sign Up" component={SignUp} options={{headerShown: false}}/>
     <Stack.Screen name="OTP Screen"  options={{headerShown: false}}>

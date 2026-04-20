@@ -1,4 +1,4 @@
-import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, Alert, FlatList, StatusBar, StyleSheet, Text, View } from "react-native"
 import CartItemBox from "../Components/CartItemBox";
 import CartListHeader from "../Components/CartListHeader";
 import CartListFooter from "../Components/CartListFooter";
@@ -231,7 +231,8 @@ const Cart=()=>{
 
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <FlatList
                 data={cartItems}
                 renderItem={({ item })=> <CartItemBox item={item} onDelete={()=>handleOnDelete(item.id)}/>}
@@ -239,7 +240,7 @@ const Cart=()=>{
                 showsVerticalScrollIndicator={false}
                 ListHeaderComponent={<CartListHeader/>}
                 ListFooterComponent={<CartListFooter price={totalPrice} onCheckout= {handleFullCheckout} onInstallmentCheckout={handleInstallmentCheckout} paying={paying}/>}
-                contentContainerStyle={{backgroundColor: '#f8f8f8'}}
+                contentContainerStyle={{padding: 10, backgroundColor: '#F8F9FB'}}
                 ListEmptyComponent={loading ? <ActivityIndicator size={24} color='#000'/>
                                             : <ErrorMessage textMessage='Your cart is empty'/>
                 }

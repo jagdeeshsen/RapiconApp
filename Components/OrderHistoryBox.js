@@ -27,10 +27,10 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
             <View style={styles.Row}>
                 <View>
                     <Text style={styles.orderIdTxt}>ORDER: {item.merchantOrderId}</Text>
-                    <Text>Placed On: {formatDate(item.createdAt)}</Text>
+                    <Text style={styles.orderPlacedTxt}>Placed On: {formatDate(item.createdAt)}</Text>
                 </View>
                 <View style={{flexDirection: 'row', gap: 5, justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{fontSize: 16}}>Status: </Text>
+                    <Text style={{fontSize: 14, fontWeight: '400', color: '#6B7A99'}}>Status: </Text>
                     <View style={styles.orderStatus}>
                         <Text style={styles.orderStatusTxt}>{ item.orderStatus }</Text>
                     </View>
@@ -40,48 +40,48 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
             <View style={styles.line}/>
 
             <View style= {styles.Row}>
-                <Text>Items</Text>
-                <Text>Qty: {item.ordertemList.length}</Text>
+                <Text style={styles.fieldLable}>Items</Text>
+                <Text style={styles.fieldValue}>Qty: {item.ordertemList.length}</Text>
             </View>
 
             <View style= {styles.Row}>
-                <Text>Amount:  {formatPrice(item.totalAmount)}</Text>
-                <Text>Paid: {item.paidAmount || 0 }</Text>
+                <Text style={styles.fieldLable}>Amount: ₹ {formatPrice(item.totalAmount)}</Text>
+                <Text style={styles.fieldValue}>Paid: ₹ {item.paidAmount || 0 }</Text>
             </View>
 
             <View style={styles.Row}>
-                <Text>Installment:  {formatPrice(item.installmentAmount)}</Text>
-                <TouchableOpacity style={styles.Row} onPress={() => toggelInstallments(item.id)}>
-                    <Text style={styles.viewInstallmentBox}>View all {expandedId === item.id ? "▲" : "▼"}</Text>
+                <Text style={styles.fieldValue}>Installment: ₹ {formatPrice(item.installmentAmount)} /mo</Text>
+                <TouchableOpacity style={styles.viewInstallmentBox} onPress={() => toggelInstallments(item.id)}>
+                    <Text style={styles.viewInstallmentText}>View all {expandedId === item.id ? "▲" : "▼"}</Text>
                 </TouchableOpacity>
             </View>
 
             {expandedId === item.id && (
                 <View style={styles.installmentBox}>
                     <View style={styles.installmentHeader}>
-                        <Text style={{fontWeight: 'bold'}}>S.N.</Text>
-                        <Text style={{fontWeight: 'bold'}}>Due Date</Text>
-                        <Text style={{fontWeight: 'bold'}}>Amount</Text>
+                        <Text style={styles.installmentHeading}>S.N.</Text>
+                        <Text style={styles.installmentHeading}>Due Date</Text>
+                        <Text style={styles.installmentHeading}>Amount</Text>
                     </View>
                     <View style={styles.line}/>
                     { item.installmentsList?.map( (ins, index) => (
                         <View  key={ins.id.toString()} style={styles.installmentRow}>
-                            <Text>{index+1}</Text>
-                            <Text>{formatDate(ins.dueDate)} </Text>
+                            <Text style={styles.fieldLable}>{index+1}</Text>
+                            <Text style={styles.fieldValue}>{formatDate(ins.dueDate)} </Text>
                             <TouchableOpacity 
                                 style={[
                                     styles.payBtn, 
                                     {
                                         backgroundColor: ins.unlocked 
-                                        ? (ins.installmentStatus === 'PENDING' ? 'royalblue' : 'green')
-                                        : 'gray'
+                                        ? (ins.installmentStatus === 'PENDING' ? '#1A3A5C' : '#065F46')
+                                        : '#FFFFFF'
                                     }
                                 ]}
                                 disabled= {!ins.unlocked}
                                 onPress={()=> installmentCheckout(item.id, ins.installmentAmount, ins.id)}>
                                 { payingId === ins.id 
                                     ? <ActivityIndicator color='white'/> 
-                                    : <Text style={{color: '#fff', fontWeight: 'bold'}}>{ins.unlocked ? 'Pay Now' : ins.installmentStatus}</Text>
+                                    : <Text style={{color: ins.unlocked ? '#FFFFFF' : '#6B7A99', fontWeight: '600'}}>{ins.unlocked ? 'Pay Now' : ins.installmentStatus}</Text>
                                 }
                             </TouchableOpacity>
                         </View>
@@ -95,12 +95,15 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
 
 const styles= StyleSheet.create({
     container:{
-        width: '95%',
-        padding: 12,
+        width: '100%',
+        padding: 10,
         borderRadius: 12,
-        marginTop: 15,
-        backgroundColor: '#fff',
+        marginTop: 5,
+        marginBottom: 5,
+        backgroundColor: '#FFFFFF',
         alignSelf: 'center',
+        borderWidth: 0.5,
+        borderColor: '#E2E8F0',
     },
 
     Row:{
@@ -112,32 +115,51 @@ const styles= StyleSheet.create({
 
     orderIdTxt:{
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: '600',
         marginRight: 10,
+        color: '1A2233',
     },
 
     orderStatus:{
-        padding: 5,
-        borderRadius: 8,
-        backgroundColor: '#d4edda',
+        padding: 8,
+        borderRadius: 5,
+        backgroundColor: '#D1FAE5',
     },
 
     orderStatusTxt:{
         fontSize: 12,
         fontWeight: '900',
-        color: '#155724',
+        color: '#065F46',
+    },
+
+    orderPlacedTxt:{
+        fontSize: 12,
+        fontWeight: '400',
+        color: '#6B7A99',
     },
 
     line:{
         height: 1,
-        backgroundColor: '#ccc',
+        backgroundColor: '#E2E8F0',
         marginVertical: 5,
     },
 
+    fieldLable:{
+        fontSize: 14,
+        fontWeight: '400',
+        color: '#6B7A99',
+    },
+
+    fieldValue:{
+        fontSize: 14,
+        fontWeight: '500',
+        color: '#1A2233',
+    },
+
     installmentBox:{
-        backgroundColor: '#f7f7f7',
+        backgroundColor: '#F8F9FB',
         padding: 10,
-        borderRadius: 8,
+        borderRadius: 10,
         marginTop: 10,
     },
 
@@ -153,17 +175,31 @@ const styles= StyleSheet.create({
         marginVertical: 3,
     },
 
+    installmentHeading:{
+        fontSize: 14,
+        fontWeight: '500',
+        color: '1A2233',
+    },
+
     viewInstallmentBox:{
-        borderWidth: 1,
-        borderColor: '#ccc',
+        borderWidth: 0.5,
+        borderColor: '#E2E8F0',
         padding: 8,
         borderRadius: 5,
-        color: 'blue'
+        backgroundColor: '#E8F0FA'
+    },
+
+    viewInstallmentText:{
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#1A2233',
     },
 
     payBtn:{
         padding: 8,
         borderRadius: 5,
+        borderWidth: 0.5,
+        borderColor: '#E2E8F0',
     },
 
 });

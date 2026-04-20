@@ -12,60 +12,87 @@ const ProductCard =({ item })=>{
     return (
         <TouchableOpacity 
             style={styles.productContainer}
-            onPress={()=> navigation.navigate('ProductInfo', {productId: item.id})}>
+            onPress={()=> navigation.navigate('ProductInfo', {productId: item.id})}
+        >
+            <View style={styles.imageContainer}>
                 <Image 
                     style={styles.cardImg} 
                     source={{uri: item.elevationUrls[0]}}
                 />
-                <View style={styles.mainContent}>
-                    <Text style={styles.mainText}>{item.designType === 'Residential' ? item.designCategory : item.designType}</Text>
-                    <Text style={styles.mainText}> ₹ {formatPrice(item.builtUpArea*5)}</Text>
+
+                <Text style={styles.categoryBadge}>
+                    {item.designType === 'Residential' ? item.designCategory : item.designType}
+                </Text>
+            </View>
+            <View style={styles.content}>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={{fontSize: 14, fontWeight: '400', color: '#1A2233'}}>Size: </Text>
+                    <Text style={styles.titleText}>{item.width}X{item.length} ft</Text>
                 </View>
-                <Text style={styles.secondText}>Size: {item.width}X{item.length} </Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={{fontSize: 14, fontWeight: '400', color: '#1A2233'}}>price: </Text>
+                    <Text style={styles.priceText}> ₹ {formatPrice(item.builtUpArea*5)}</Text>
+                </View>
+            </View>
         </TouchableOpacity>
     );
 };
 
 const styles= StyleSheet.create({
     productContainer:{
-        width: 175,
-        height: 220,
-        backgroundColor: 'white',
-        borderRadius: 15,
+        width: 170,
+        backgroundColor: '#ffffff',
+        borderRadius: 16,
         margin: 8,
-        
+        // Shadow (iOS)
+        shadowColor: '#000',
+        shadowOpacity: 0.08,
+        shadowRadius: 6,
+        shadowOffset: { width: 0, height: 3 },
+        // Elevation (Android)
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
+    },
+
+    imageContainer:{
+        position: 'relative',
     },
 
     cardImg:{
         width: '100%',
-        height: 160,
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
-        overflow: 'hidden',
-        resizeMode: 'cover',
-        alignSelf:'stretch'
+        height: 140,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
     },
 
-    mainText:{
-        fontSize: 14, 
-        fontWeight: '600', 
-        fontFamily: 'Poppins-Bold',
-        marginStart: 5,
-        marginEnd: 5,
-        marginTop: 5, 
-        alignSelf: 'flex-start',
+    categoryBadge: {
+        position: 'absolute',
+        bottom: 8,
+        left: 8,
+        backgroundColor: '#D4A017',
+        color: '#fff',
+        fontSize: 10,
+        fontWeight: '600',
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+        borderRadius: 4,
     },
 
-    secondText:{
+    priceText: {
         fontSize: 14,
-        color: 'darkgray',
-        marginStart: 5,
+        fontWeight: '600',
+        color: '#D4A017',
+        marginTop: 2,
     },
 
-    mainContent:{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+    titleText: {
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#000',
+    },
+
+    content:{
+        padding: 8,
     },
 });
 

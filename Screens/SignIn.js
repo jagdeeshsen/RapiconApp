@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { StyleSheet, Text, View, TouchableOpacity, StatusBar } from "react-native"
 import IntputBox from "../Components/InputBox";
 import CustomBackBtn from "../Components/CustomBackBtn";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { userService } from "../Service/UserService";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SignIn=()=>{
 
@@ -44,7 +45,8 @@ const SignIn=()=>{
     const isPhoneValid= phone && !error;
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <View style={styles.backBtn}>
                 <CustomBackBtn screen='Welcome Screen'/>
             </View>
@@ -62,21 +64,21 @@ const SignIn=()=>{
             /> 
 
             <TouchableOpacity 
-                style={[styles.registerBtn, { backgroundColor: isPhoneValid ? 'green' : '#ccc'}]}
+                style={[styles.registerBtn, { backgroundColor: isPhoneValid ? '#1A3A5C' : '#FFFFFF'}]}
                 disabled={!isPhoneValid}
                 onPress={handleSendOTP}
             >
-                <Text style={styles.btnText}>Send OTP</Text>
+                <Text style={[styles.btnText, {color: isPhoneValid ? '#FFFFFF' : '#1A3A5C'}]}>Send OTP</Text>
             </TouchableOpacity>
 
             <View style={styles.TAndCContainer}>
-                <Text>Don't have an account? </Text>
+                <Text style={{color: '#1A2233'}}>Don't have an account? </Text>
                 <TouchableOpacity onPress={()=> navigation.navigate('Sign Up')}>
                     <Text style={styles.clickableText}>Sign Up here</Text>
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -85,7 +87,7 @@ const styles= StyleSheet.create({
         flex: 1,
         padding: 20,
         alignItems: 'center',
-        backgroundColor: '#f6f8fa',
+        backgroundColor: '#F8F9FB',
     },
 
     mainHeading:{
@@ -94,6 +96,7 @@ const styles= StyleSheet.create({
         alignSelf: 'flex-start',
         marginStart: 20,
         marginBottom: 5,
+        color: '#1A2233',
     },
 
     backBtn:{
@@ -106,11 +109,12 @@ const styles= StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
         margin: 5,
+        color: '#1A2233',
     },
 
     subHeading:{
         fontSize: 13,
-        color: '#555',
+        color: '#1A2233',
         textAlign: 'center',
         marginBottom: 30,
     },
@@ -128,18 +132,19 @@ const styles= StyleSheet.create({
         paddingHorizontal: 24,
         borderRadius: 10,
         opacity:  1,
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
     },
 
     btnText:{
         fontSize: 18,
         fontWeight: '700',
-        color: 'white',
     },
 
     clickableText:{
         fontSize: 14,
-        fontWeight: '300',
-        color: 'darkgreen',
+        fontWeight: '500',
+        color: '#1A3A5C',
     },
 });
 

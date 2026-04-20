@@ -11,18 +11,19 @@ const CustomBtn=({title, onPress})=>{
 
 const styles= StyleSheet.create({
     btnWrapper:{
-        width: '90%',
+        width: '95%',
         height: 50,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'royalblue'
+        borderWidth: 1,
+        borderColor: '#E2E8F0',
     },
 
     text:{
         fontSize: 16,
         fontWeight: '600',
-        color: 'white'
+        color: '#1A3A5C'
     }
 });
 

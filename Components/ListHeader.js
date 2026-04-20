@@ -16,7 +16,8 @@ const ListHeader=({ onSearch })=>{
 const styles= StyleSheet.create({
 
     wrapperContainer:{
-        padding: 10
+        padding: 10,
+        backgroundColor: '#F8F9FB',
     },
 
     mainContent:{
@@ -47,6 +48,7 @@ const styles= StyleSheet.create({
    productCardHeading:{
     fontSize: 18,
     marginTop: 20,
+    color: '#1A2233',
     fontWeight: '700'
    },
 

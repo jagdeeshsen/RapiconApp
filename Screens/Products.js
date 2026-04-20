@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StatusBar, StyleSheet, View } from "react-native";
 import { ProductService } from "../Service/ProductService";
 import ProductCard from "../Components/ProductCard";
 import ErrorMessage from "../Components/ErrorMessage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Products=({ route })=> {
 
@@ -34,7 +35,8 @@ const Products=({ route })=> {
 
 
     return (
-        <View style={styles.wrapper}>
+        <SafeAreaView style={styles.wrapper}>
+            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <FlatList
                 data={allProducts}
                 renderItem={({ item })=>( <ProductCard item={item}/>)}
@@ -43,7 +45,7 @@ const Products=({ route })=> {
                 numColumns={2}
                 ListEmptyComponent={ loading ? <ActivityIndicator size="large" style={styles.activityIndicator}/> : <ErrorMessage textMessage= 'No product found. Please try again'/>}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -53,7 +55,7 @@ const styles=StyleSheet.create({
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f8f8f8'
+        backgroundColor: '#F8F9FB',
     },
 
     activityIndicator: {

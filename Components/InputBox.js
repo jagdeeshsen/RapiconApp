@@ -7,8 +7,8 @@ const IntputBox= ({value, icon, placeholder, keyboardType, OnChangeText, maxLen,
 
     return (
         <View style={{marginBottom: 5}}>
-            <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#ffffff'}]}>
-                <MaterialIcons name={icon} size={22} color={ error ? 'red': '#777'} style={styles.icon}/>
+            <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#FFFFFF'}]}>
+                <MaterialIcons name={icon} size={22} color={ error ? 'red': '#1A3A5C'} style={styles.icon}/>
                 <TextInput 
                     onChangeText= {(text)=> OnChangeText(icon,text)} 
                     style={styles.input} 

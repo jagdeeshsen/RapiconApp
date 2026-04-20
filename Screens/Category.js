@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Category=()=> {
 
@@ -16,41 +17,40 @@ const Category=()=> {
     const navigation= useNavigation();
 
     return (
-        <View style={styles.mainContainer}>
-            <Text style={styles.residencialTxt}>Design Category</Text>
+        <SafeAreaView style={styles.mainContainer}>
             <FlatList
                 data={categoryList}
                 renderItem={({ item })=> (
                     <TouchableOpacity style={styles.categoryBox} onPress={()=> navigation.navigate('Home', {screen: 'AllProduct', params: {product: item}})}>
                         <Image style={styles.categoryImg} source={{uri : item.url }}/>
-                        <Text style={{marginTop: 5}}>{item.name}</Text>
+                        <Text style={styles.title}>{item.name}</Text>
                     </TouchableOpacity>
                 )}
                 keyExtractor={(item)=> item.id}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
+                contentContainerStyle={{padding: 10}}
             />
-        </View>
+        </SafeAreaView>
     )
 };
 
 const styles= StyleSheet.create({
     mainContainer:{
         flex: 1,
-        backgroundColor: 'white',
-        padding: 10,
+        backgroundColor: '#F8F9FB',
         justifyContent: 'center',
         alignItems: 'center'
     },
 
     categoryBox:{
-        width: 150,
+        width: '45%',
         height: 130,
         borderRadius: 10,
-        backgroundColor: '#1eef4',
+        backgroundColor: '#FFFFF',
         margin: 10,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     categoryImg:{
@@ -61,12 +61,11 @@ const styles= StyleSheet.create({
         borderRadius: 10
     },
 
-    residencialTxt:{
+    title:{
         fontSize: 16,
-        fontWeight: '600',
-        margin: 10,
-        color: 'blue',
-        alignSelf: 'flex-start'
+        fontWeight: '500',
+        color: '1A2233',
+        marginTop: 5,
     },
 
 });
