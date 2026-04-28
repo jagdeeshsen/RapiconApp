@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, ScrollView, StyleSheet, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { userService } from "../Service/UserService";
 import { getAuthData, removeAuthData } from "../utils/authStorage";
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -134,7 +134,12 @@ const Profile= ({ setIsLoggedIn }) => {
 
     
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+	<>
+		{/* Top status bar background */}
+  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
+    			<StatusBar barStyle="light-content" />
+  		</SafeAreaView>
+        <SafeAreaView edges = {[ 'left', 'right', 'bottom' ]} style={{ backgroundColor: '#F8F9FB'}}>
             <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.touchableOpacity} onPress={()=> navigation.goBack()}>
@@ -239,6 +244,7 @@ const Profile= ({ setIsLoggedIn }) => {
                     onCancel={()=> setModalVisible(false)}/>
             </ScrollView>
         </SafeAreaView>
+	</>
     );
 };
 

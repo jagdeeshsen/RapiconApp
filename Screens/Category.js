@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Category=()=> {
@@ -17,7 +17,9 @@ const Category=()=> {
     const navigation= useNavigation();
 
     return (
-        <SafeAreaView style={styles.mainContainer}>
+	<>
+	<StatusBar barStyle = 'light-content' />
+        <SafeAreaView  edges = {[ 'left', 'right' ]} style={styles.mainContainer}>
             <FlatList
                 data={categoryList}
                 renderItem={({ item })=> (
@@ -29,9 +31,10 @@ const Category=()=> {
                 keyExtractor={(item)=> item.id}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{padding: 10}}
+                contentContainerStyle={{padding: 8}}
             />
         </SafeAreaView>
+	</>
     )
 };
 

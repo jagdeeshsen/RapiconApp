@@ -77,8 +77,12 @@ const SignUp= ()=>{
     const isFormValid= form.person && form.email && form.phone && agreed && !errors.email && !errors.phone && !errors.person;
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+	<>
+		{/* Top status bar background */}
+  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
+    			<StatusBar barStyle="light-content" />
+  		</SafeAreaView>
+        <SafeAreaView edges = {[ 'left', 'right', 'bottom' ]}  style={styles.container}>
             <View style={styles.backBtn}>
                 <CustomBackBtn screen='Welcome Screen'/>
             </View>
@@ -150,6 +154,7 @@ const SignUp= ()=>{
             </View>
 
         </SafeAreaView>
+	</>
     );
 };
 

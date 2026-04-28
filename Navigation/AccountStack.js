@@ -16,10 +16,10 @@ const AccountStack = ({ setIsLoggedIn }) => {
             <Stack.Screen name="My Profile" options={{headerShown: false}}>
                 {(props) => <Profile {...props} setIsLoggedIn={setIsLoggedIn}/>}
             </Stack.Screen>
-            <Stack.Screen name="My Order" options={{ headerStyle:{backgroundColor: '#F8F9FB'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#1A2233'}}}>
+            <Stack.Screen name="My Order" options={{ headerStyle:{backgroundColor: '#1A3A5C'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#FFFFFF'}}}>
                 {(props) => <Order {...props} setIsLoggedIn={setIsLoggedIn}/>}
             </Stack.Screen>
-            <Stack.Screen name="Support" component={Support} options={{ headerTitle: 'Help and Support', headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#1A2233'}, headerStyle:{backgroundColor: '#F8F9FB'}}}/>
+            <Stack.Screen name="Support" component={Support} options={{ headerTitle: 'Help and Support', headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#FFFFFF'}, headerStyle:{backgroundColor: '#1A3A5C'}}}/>
         </Stack.Navigator>
     );
 };

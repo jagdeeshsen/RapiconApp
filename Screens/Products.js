@@ -35,7 +35,9 @@ const Products=({ route })=> {
 
 
     return (
-        <SafeAreaView style={styles.wrapper}>
+	<>
+	<StatusBar barStyle = 'light-content' />
+        <SafeAreaView edges = {[ 'left', 'right' ]} style={styles.wrapper}>
             <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
             <FlatList
                 data={allProducts}
@@ -43,16 +45,17 @@ const Products=({ route })=> {
                 keyExtractor={(item)=> item.id}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
+		contentContainerStyle = {{ padding: 8}}
                 ListEmptyComponent={ loading ? <ActivityIndicator size="large" style={styles.activityIndicator}/> : <ErrorMessage textMessage= 'No product found. Please try again'/>}
             />
         </SafeAreaView>
+	</>
     );
 };
 
 const styles=StyleSheet.create({
     wrapper:{
         flex: 1,
-        padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F8F9FB',

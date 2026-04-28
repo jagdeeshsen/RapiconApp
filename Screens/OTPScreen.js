@@ -82,8 +82,12 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
     const isOTPValid= otp.length === 6;
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+	<>
+		{/* Top status bar background */}
+  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
+    			<StatusBar barStyle="light-content" />
+  		</SafeAreaView>
+        <SafeAreaView  edges = {[ 'left', 'right', 'bottom' ]} style={styles.container}>
             <View style={styles.backBtn}>
                 <CustomBackBtn screen='Sign In'/>
             </View>
@@ -122,6 +126,7 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
+	</>
     );
 };
 
@@ -143,6 +148,11 @@ const styles= StyleSheet.create({
         marginBottom: 15,
         backgroundColor: '#FFFFFF',
     },
+
+   input:{
+	flex: 1,
+	height: 45,
+   },
 
     mainHeading:{
         fontSize: 14,

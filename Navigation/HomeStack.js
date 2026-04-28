@@ -11,8 +11,8 @@ const HomeStack = () => {
         <Stack.Navigator>
             <Stack.Screen name="home" component={Home} options={{headerShown: false}}/>
             <Stack.Screen name="ProductInfo" component={ProductInfo} options={{headerShown: false}}/>
-            <Stack.Screen name="Package Details" component={PackageDetails} options={{ headerTitle: 'Packages', headerStyle:{backgroundColor: '#F8F9FB'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#000'}}}/>
-            <Stack.Screen name="AllProduct" component={Products} options={{headerTitle: 'Products', headerStyle:{backgroundColor: '#fff'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#000'}}}/>
+            <Stack.Screen name="Package Details" component={PackageDetails} options={{ headerTitle: 'Packages', headerStyle:{backgroundColor: '#1A3A5C'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#FFFFFF'}}}/>
+            <Stack.Screen name="AllProduct" component={Products} options={{headerTitle: 'Products', headerStyle:{backgroundColor: '#1A3A5C'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#FFFFFF'}}}/>
         </Stack.Navigator>
     );
 

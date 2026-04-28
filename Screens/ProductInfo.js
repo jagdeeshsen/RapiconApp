@@ -70,8 +70,13 @@ const ProductInfo=({ route })=>{
     };
 
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-        <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+
+	<>
+	{/* Top status bar background */}
+  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
+    			<StatusBar barStyle="light-content" />
+  		</SafeAreaView>
+      <SafeAreaView edges = {[ 'left', 'right', 'bottom' ]} style={{ backgroundColor: '#F8F9FB'}}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
 
           <ImageCarousel urls = {imageUrls}/>
@@ -145,6 +150,7 @@ const ProductInfo=({ route })=>{
           </View>
         </ScrollView>
       </SafeAreaView>
+	</>
       
     );
 };
@@ -194,7 +200,7 @@ const styles= StyleSheet.create({
   bottomWrapper:{
     width: '100%',
     height: 100,
-    backgroundColor: 'white',
+    backgroundColor: '#F8F9FB',
     alignItems: 'baseline',
     flexDirection: 'row',
     justifyContent: 'space-around',

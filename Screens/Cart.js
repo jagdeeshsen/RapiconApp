@@ -231,8 +231,12 @@ const Cart=()=>{
 
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+	<>
+		{/* Top status bar background */}
+  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
+    			<StatusBar barStyle="light-content" />
+  		</SafeAreaView>
+        <SafeAreaView edges = {['left', 'right' ]} style={{flex: 1, backgroundColor: '#F8F9FB'}}>
             <FlatList
                 data={cartItems}
                 renderItem={({ item })=> <CartItemBox item={item} onDelete={()=>handleOnDelete(item.id)}/>}
@@ -240,12 +244,13 @@ const Cart=()=>{
                 showsVerticalScrollIndicator={false}
                 ListHeaderComponent={<CartListHeader/>}
                 ListFooterComponent={<CartListFooter price={totalPrice} onCheckout= {handleFullCheckout} onInstallmentCheckout={handleInstallmentCheckout} paying={paying}/>}
-                contentContainerStyle={{padding: 10, backgroundColor: '#F8F9FB'}}
+                contentContainerStyle={{padding: 8, backgroundColor: '#F8F9FB'}}
                 ListEmptyComponent={loading ? <ActivityIndicator size={24} color='#000'/>
                                             : <ErrorMessage textMessage='Your cart is empty'/>
                 }
             />
         </SafeAreaView>
+	</>
     )
 };
 

@@ -1,5 +1,5 @@
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Alert, Linking, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { Alert, Linking, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { useState } from "react";
 import { SupportService } from '../Service/SupportService';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -33,7 +33,7 @@ const Support = () => {
             err.email = isValidEmail(value) ? '' : 'Invalid email';
         }
         
-        if(key === 'name'){
+        if(key === 'fullName'){
             err.fullName = value.length>=2 ? '' : 'Name too short'; 
         }
         
@@ -55,7 +55,9 @@ const Support = () => {
     
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+	<>
+	<StatusBar barStyle = 'light-content' />
+        <SafeAreaView edges = {[ 'left', 'right' ]} style={{flex: 1, backgroundColor: '#F8F9FB'}}>
             <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.box}>
                     <View style={styles.iconBox}>
@@ -87,12 +89,12 @@ const Support = () => {
                     <View style={styles.queryBox}>
                         <MaterialIcons name="person" size={24} color='#1A3A5C' style={styles.iconStyle}/>
                         <TextInput
-                            value={form.name}
+                            value={form.fullName}
                             placeholder="Enter name"
-                            keyboardType="text"
-                            onChangeText={(text) => handleOnChange('name', text)}
+                            keyboardType="default"
+                            onChangeText={(text) => handleOnChange('fullName', text)}
                             style={styles.input}
-                            error = {errors.name}
+              
                         />
                     </View>
 
@@ -105,7 +107,7 @@ const Support = () => {
                             onChangeText={(text) => handleOnChange('phone', text)}
                             style={styles.input}
                             maxLength={10}
-                            error = {errors.phone}
+                            
                         />
                     </View>
 
@@ -114,20 +116,20 @@ const Support = () => {
                         <TextInput
                             value={form.email}
                             placeholder="Enter email"
-                            keyboardType="text"
+                            keyboardType="email-address"
                             onChangeText={(text) => handleOnChange('email', text)}
                             style={styles.input}
-                            error = {errors.email}
+                            
                         />
                     </View>
 
                     <View style={styles.queryBox}>
-                        <MaterialIcons name="message" size={24} color='#1A3A5C' style={styles.iconStyle}/>
+                        <MaterialIcons name="chat" size={24} color='#1A3A5C' style={styles.iconStyle}/>
                         <TextInput
-                            value={form.message}
+                            value={form.query}
                             placeholder="Enter message"
-                            keyboardType="text"
-                            onChangeText={(text) => handleOnChange('message', text)}
+                            keyboardType="default"
+                            onChangeText={(text) => handleOnChange('query', text)}
                             style={styles.input}
                         />
                     </View>
@@ -152,6 +154,7 @@ const Support = () => {
                 </View>
             </ScrollView>
         </SafeAreaView>
+	</>
     );
 };
 

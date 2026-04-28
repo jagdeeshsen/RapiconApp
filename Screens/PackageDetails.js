@@ -131,11 +131,12 @@ const PackageDetails=({ route })=>{
     }
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+	<>
+	<StatusBar barStyle="light-content" />
+        <SafeAreaView  edges = {[ 'left', 'right' ]} style={{ flex: 1, backgroundColor: '#F8F9FB'}}>
             <ScrollView 
             showsVerticalScrollIndicator= {false}
-            contentContainerStyle={{padding: 10, paddingBottom: 10}}>
+            contentContainerStyle={{padding: 8}}>
                 <Text style={styles.headingText}>Choose Your Package </Text>
                 <View style={styles.packageCotainer}>
                     <PackageBox
@@ -213,6 +214,7 @@ const PackageDetails=({ route })=>{
                 </View>
             </ScrollView>
         </SafeAreaView>
+	</>
     );
 };
 

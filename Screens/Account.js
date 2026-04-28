@@ -68,8 +68,12 @@ const Account =({ setIsLoggedIn })=>{
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+	<>
+		{/* Top status bar background */}
+  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
+    			<StatusBar barStyle="light-content" />
+  		</SafeAreaView>
+        <SafeAreaView edges ={[ 'left', 'right', 'bottom' ]} style={styles.container}>
             <ScrollView style={{width: '100%'}}>
                 <View style={styles.header}>
                     <View style={{flexDirection: 'row'}}>
@@ -107,12 +111,12 @@ const Account =({ setIsLoggedIn })=>{
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
+	</>
     )
 };
 
 const styles= StyleSheet.create({
     container:{
-        flex: 1,
         backgroundColor: '#F8F9FB',
         alignItems: 'center',
     },
