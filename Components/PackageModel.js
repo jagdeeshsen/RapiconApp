@@ -15,11 +15,11 @@ const PackageModel=({ item })=>{
                 <Text style={styles.descriptionText}>{item.description}</Text>
             </View>
             <View>
-                <Text style={{color: '#1A2233', fontSize: 15, fontWeight: 500, margin: 10}}>Highlights:</Text>
+                <Text style={{color: '#1A2233', fontSize: 20, fontWeight: 500, margin: 10}}>Highlights:</Text>
                 {highlights.map((point, index)=>(
                     <View key={index} style={styles.infoBox}>
                         <Ionicons name="checkmark-circle" size={12} alignSelf= 'center' margin= {3} color="green" />
-                        <Text style={{fontSize: 12, width: '90%', color: '#6B7A99'}}>{point}</Text>
+                        <Text style={{fontSize: 14, width: '90%', color: '#6B7A99'}}>{point}</Text>
                     </View>
                 ))}
             </View>
@@ -30,7 +30,7 @@ const PackageModel=({ item })=>{
 
 const styles= StyleSheet.create({
     packageWrapper:{
-        width: '60%',
+        width: '70%',
         height: 'auto',
         backgroundColor: '#F8F9FB',
         borderRadius: 10,
@@ -48,14 +48,14 @@ const styles= StyleSheet.create({
     },
 
     headerText:{
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: '500',
         alignSelf: 'center',
         color: '#FFFFFF'
     },
 
     headerPriceText:{
-        fontSize: 14,
+        fontSize: 18,
         fontWeight: '400',
         alignSelf: 'center',
         color: '#E8F0FA'
@@ -64,7 +64,7 @@ const styles= StyleSheet.create({
     descriptionText:{
         margin: 5,
         fontWeight: '400',
-        fontSize: 12,
+        fontSize: 16,
         padding: 5,
         color: '#1A2233'
     },

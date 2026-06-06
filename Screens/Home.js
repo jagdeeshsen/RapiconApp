@@ -44,7 +44,7 @@ const Home=()=>{
     			<StatusBar barStyle="light-content" />
   		</SafeAreaView>
 
-        	<SafeAreaView edges = {[ 'left', 'right' ]} style={{ flex : 1, backgroundColor: '#F8F9FB', alignItems: 'center'}}>
+        	<SafeAreaView edges = {[ 'left', 'right' ]} style={{ flex : 1, backgroundColor: '#F8F9FB', alignItems: 'center', justifyContent: 'center'}}>
             	<FlatList 
                 	data={filteredDesigns}
                 	renderItem={({item})=>(<ProductCard item ={item}/>)}

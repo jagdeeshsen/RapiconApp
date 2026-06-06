@@ -113,7 +113,7 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
                 onPress={handleVarifyOTP}
                 disabled= {!isOTPValid}
             >
-                <Text style={[styles.btnText, {color: isOTPValid ? '#FFFFFF' : '#1A3A5C'}]}>Varify</Text>
+                <Text style={[styles.btnText, {color: isOTPValid ? '#FFFFFF' : '#1A3A5C'}]}>Verify</Text>
             </TouchableOpacity>
 
             <View style={styles.TAndCContainer}>

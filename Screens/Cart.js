@@ -163,7 +163,7 @@ const Cart=()=>{
             const response = await PhonePePaymentSDK.startTransaction(JSON.stringify(payload), APP_SCHEME);
             console.log(response);
 
-            if (response.status === 'CONCLUDED') {
+            if (response.status === 'SUCCESS') {
                 await verifyOrderOnServer(orderResponse.merchantOrderId, orderResponse.id);
                 //Alert.alert('Payment successful', 'Your order has been placed!');
                 //setCartItems([]);

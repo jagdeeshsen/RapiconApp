@@ -73,7 +73,7 @@ const Account =({ setIsLoggedIn })=>{
   		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
     			<StatusBar barStyle="light-content" />
   		</SafeAreaView>
-        <SafeAreaView edges ={[ 'left', 'right', 'bottom' ]} style={styles.container}>
+        <SafeAreaView edges ={[ 'left', 'right' ]} style={styles.container}>
             <ScrollView style={{width: '100%'}}>
                 <View style={styles.header}>
                     <View style={{flexDirection: 'row'}}>
@@ -97,6 +97,7 @@ const Account =({ setIsLoggedIn })=>{
                 <View>
                     <ProfileCategoryBox name ='About us' icon='information-circle-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
                     <ProfileCategoryBox name ='Our Services' icon='construct-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
+		    <ProfileCategoryBox name ='Become a Seller' icon='storefront' onPress={() => Linking.openURL('https://rapiconinfra.com/vendor-landing.html')}/>
                 </View>
 
                 <Text style={styles.heading}>SUPPORT</Text>
@@ -117,6 +118,7 @@ const Account =({ setIsLoggedIn })=>{
 
 const styles= StyleSheet.create({
     container:{
+	flex: 1,
         backgroundColor: '#F8F9FB',
         alignItems: 'center',
     },

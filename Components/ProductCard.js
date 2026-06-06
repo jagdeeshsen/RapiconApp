@@ -40,8 +40,8 @@ const ProductCard =({ item })=>{
 
 const styles= StyleSheet.create({
     productContainer:{
-        width: 170,
-        backgroundColor: '#ffffff',
+        width: '45%',
+        backgroundColor: '#FFFFFF',
         borderRadius: 16,
         margin: 8,
         // Shadow (iOS)

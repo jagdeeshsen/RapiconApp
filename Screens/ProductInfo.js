@@ -76,7 +76,7 @@ const ProductInfo=({ route })=>{
   		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
     			<StatusBar barStyle="light-content" />
   		</SafeAreaView>
-      <SafeAreaView edges = {[ 'left', 'right', 'bottom' ]} style={{ backgroundColor: '#F8F9FB'}}>
+      <SafeAreaView edges = {[ 'left', 'right' ]} style={{ flex: 1, backgroundColor: '#F8F9FB'}}>
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
 
           <ImageCarousel urls = {imageUrls}/>
@@ -146,7 +146,7 @@ const ProductInfo=({ route })=>{
           </View>
 
           <View style={styles.bottomWrapper}>
-            <CustomBtn title={'See Plans'} onPress={()=> navigation.navigate('Package Details', {itemId : product.id})} />
+            <CustomBtn title={'See Packages'} onPress={()=> navigation.navigate('Package Details', {itemId : product.id})} />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -156,13 +156,6 @@ const ProductInfo=({ route })=>{
 };
 
 const styles= StyleSheet.create({
-
-  infoText:{
-    fontSize: 18,
-    fontWeight: '500',
-    margin: 15,
-    color: 'blue'
-  },
 
   categoryBadge: {
     bottom: 8,
@@ -199,7 +192,7 @@ const styles= StyleSheet.create({
 
   bottomWrapper:{
     width: '100%',
-    height: 100,
+    height: 70,
     backgroundColor: '#F8F9FB',
     alignItems: 'baseline',
     flexDirection: 'row',

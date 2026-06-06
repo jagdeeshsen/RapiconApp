@@ -16,6 +16,7 @@ const ListHeader=({ onSearch })=>{
 const styles= StyleSheet.create({
 
     wrapperContainer:{
+	
         padding: 10,
         backgroundColor: '#F8F9FB',
     },

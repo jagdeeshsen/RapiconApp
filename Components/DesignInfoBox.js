@@ -12,7 +12,7 @@ const DesignInfoBox = ({ title, quantity }) => {
 
 const styles = StyleSheet.create({
     Box:{
-        width: 100,
+        width: '30%',
         height: 80,
         backgroundColor: '#E8F0FA',
         borderRadius: 12,
