@@ -18,6 +18,7 @@ const styles= StyleSheet.create({
         justifyContent: 'center',
         borderWidth: 1,
         borderColor: '#E2E8F0',
+        backgroundColor: '#FFFFFF',
     },
 
     text:{

@@ -30,7 +30,7 @@ const PackageModel=({ item })=>{
 
 const styles= StyleSheet.create({
     packageWrapper:{
-        width: '60%',
+        width: '70%',
         height: 'auto',
         backgroundColor: '#F8F9FB',
         borderRadius: 10,

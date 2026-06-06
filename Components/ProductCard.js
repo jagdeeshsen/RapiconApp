@@ -40,7 +40,7 @@ const ProductCard =({ item })=>{
 
 const styles= StyleSheet.create({
     productContainer:{
-        width: 170,
+        width: '46%',
         backgroundColor: '#ffffff',
         borderRadius: 16,
         margin: 8,

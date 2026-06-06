@@ -163,7 +163,7 @@ const Cart=()=>{
             const response = await PhonePePaymentSDK.startTransaction(JSON.stringify(payload), APP_SCHEME);
             console.log(response);
 
-            if (response.status === 'CONCLUDED') {
+            if (response.status === 'SUCCESS') {
                 await verifyOrderOnServer(orderResponse.merchantOrderId, orderResponse.id);
                 //Alert.alert('Payment successful', 'Your order has been placed!');
                 //setCartItems([]);
@@ -231,20 +231,22 @@ const Cart=()=>{
 
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
-            <FlatList
-                data={cartItems}
-                renderItem={({ item })=> <CartItemBox item={item} onDelete={()=>handleOnDelete(item.id)}/>}
-                keyExtractor={(item)=> item.id}
-                showsVerticalScrollIndicator={false}
-                ListHeaderComponent={<CartListHeader/>}
-                ListFooterComponent={<CartListFooter price={totalPrice} onCheckout= {handleFullCheckout} onInstallmentCheckout={handleInstallmentCheckout} paying={paying}/>}
-                contentContainerStyle={{padding: 10, backgroundColor: '#F8F9FB'}}
-                ListEmptyComponent={loading ? <ActivityIndicator size={24} color='#000'/>
-                                            : <ErrorMessage textMessage='Your cart is empty'/>
-                }
-            />
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style={{flex:1, backgroundColor: '#F8F9FB'}}>
+                <CartListHeader/>
+                <FlatList
+                    data={cartItems}
+                    renderItem={({ item })=> <CartItemBox item={item} onDelete={()=>handleOnDelete(item.id)}/>}
+                    keyExtractor={(item)=> item.id}
+                    showsVerticalScrollIndicator={false}
+                    ListFooterComponent={<CartListFooter price={totalPrice} onCheckout= {handleFullCheckout} onInstallmentCheckout={handleInstallmentCheckout} paying={paying}/>}
+                    contentContainerStyle={{padding: 8, backgroundColor: '#F8F9FB'}}
+                    ListEmptyComponent={loading ? <ActivityIndicator size={24} color='#000'/>
+                                                : <ErrorMessage textMessage='Your cart is empty'/>
+                    }
+                />
+            </View>
         </SafeAreaView>
     )
 };

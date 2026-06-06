@@ -1,10 +1,9 @@
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import { Linking, ScrollView, StatusBar, TouchableOpacity } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import ProfileCategoryBox from "../Components/ProfileCategoryBox";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { userService } from "../Service/UserService";
-import { checkToken, getAuthData, removeAuthData } from "../utils/authStorage";
+import { checkToken, clearAll, getAuthData } from "../utils/authStorage";
 import { useCallback, useState } from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -22,6 +21,9 @@ const Account =({ setIsLoggedIn })=>{
         setPhone(authData?.phone);
 
         if (!authData?.token) {
+            const result= await userService.logoutUser();
+            console.log(result);
+            await clearAll(); // clear tokens and auth data
             setIsLoggedIn(false);
             return;
         }
@@ -48,7 +50,7 @@ const Account =({ setIsLoggedIn })=>{
         try{
             const result= await userService.logoutUser();
             console.log(result);
-            removeAuthData();
+            await clearAll(); // clear tokens and auth data
             setIsLoggedIn(false);
         }catch(err){
             console.log('Logout error', err.message);
@@ -68,44 +70,47 @@ const Account =({ setIsLoggedIn })=>{
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
-            <ScrollView style={{width: '100%'}}>
-                <View style={styles.header}>
-                    <View style={{flexDirection: 'row'}}>
-                        <View style={styles.avatar}>
-                            <Text style={styles.avatarText}>{getInitials()}</Text>
-                        </View>
-                        <View style={{marginStart: 10}}>
-                            <Text style={styles.fullNameText}>{name}</Text>
-                            <Text style={styles.phoneText}>{phone}</Text>
+        <SafeAreaView edges={['top']} style={styles.container}>
+            <StatusBar barStyle="light-content"/>
+            <View style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+                <ScrollView style={{width: '100%'}}>
+                    <View style={styles.header}>
+                        <View style={{flexDirection: 'row'}}>
+                            <View style={styles.avatar}>
+                                <Text style={styles.avatarText}>{getInitials()}</Text>
+                            </View>
+                            <View style={{marginStart: 10}}>
+                                <Text style={styles.fullNameText}>{name}</Text>
+                                <Text style={styles.phoneText}>{phone}</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
-                <Text style={styles.heading}>ACCOUNT</Text>
-                <View>
-                    <ProfileCategoryBox name ='My Profile' icon='person-circle-outline' onPress={()=> navigation.navigate('My Profile')}/>
-                    <ProfileCategoryBox name ='My Orders' icon='bag-handle-outline' onPress={() => navigation.navigate('My Order')}/>
-                    <ProfileCategoryBox name ='Payments' icon='card-outline' onPress={() => navigation.navigate('My Order')}/>
-                </View>
+                    <Text style={styles.heading}>ACCOUNT</Text>
+                    <View>
+                        <ProfileCategoryBox name ='My Profile' icon='person-circle-outline' onPress={()=> navigation.navigate('My Profile')}/>
+                        <ProfileCategoryBox name ='My Orders' icon='bag-handle-outline' onPress={() => navigation.navigate('My Order')}/>
+                        <ProfileCategoryBox name ='Notifications' icon='notifications-outline' onPress={() => navigation.navigate('Notification')}/>
+                    </View>
 
-                <Text style={styles.heading}>PREFERENCES</Text>
-                <View>
-                    <ProfileCategoryBox name ='About us' icon='information-circle-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
-                    <ProfileCategoryBox name ='Our Services' icon='construct-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
-                </View>
+                    <Text style={styles.heading}>PREFERENCES</Text>
+                    <View>
+                        <ProfileCategoryBox name ='About us' icon='information-circle-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
+                        <ProfileCategoryBox name ='Our Services' icon='construct-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
+                        <ProfileCategoryBox name ='Become a Seller' icon='storefront' onPress={() => Linking.openURL('https://rapiconinfra.com/vendor-landing.html')}/>
+                    </View>
 
-                <Text style={styles.heading}>SUPPORT</Text>
-                <View style={styles.accountInfo}>
-                    <ProfileCategoryBox name ='Help Center' icon='help-circle-outline' onPress={() => navigation.navigate('Support')}/>
-                    <ProfileCategoryBox name ='Terms & Conditions' icon='document-text-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
-                    <ProfileCategoryBox name ='Privacy Policy' icon='lock-closed-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/privacy-policy.html')}/>
-                </View>
+                    <Text style={styles.heading}>SUPPORT</Text>
+                    <View style={styles.accountInfo}>
+                        <ProfileCategoryBox name ='Help Center' icon='help-circle-outline' onPress={() => navigation.navigate('Support')}/>
+                        <ProfileCategoryBox name ='Terms & Conditions' icon='document-text-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
+                        <ProfileCategoryBox name ='Privacy Policy' icon='lock-closed-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/privacy-policy.html')}/>
+                    </View>
 
-                <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
-                    <Text style={styles.logoutBtnText}>Logout</Text>
-                </TouchableOpacity>
-            </ScrollView>
+                    <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
+                        <Text style={styles.logoutBtnText}>Logout</Text>
+                    </TouchableOpacity>
+                </ScrollView>
+            </View>
         </SafeAreaView>
     )
 };
@@ -113,8 +118,7 @@ const Account =({ setIsLoggedIn })=>{
 const styles= StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor: '#F8F9FB',
-        alignItems: 'center',
+        backgroundColor: '#1A3A5C',
     },
 
     header:{

@@ -55,102 +55,104 @@ const Support = () => {
     
 
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-            <ScrollView contentContainerStyle={styles.container}>
-                <View style={styles.box}>
-                    <View style={styles.iconBox}>
-                        <MaterialIcons name="phone" size={24} color='#1A3A5C'/>
+        <SafeAreaView edges={[]} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <View style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+                <ScrollView contentContainerStyle={styles.container}>
+                    <View style={styles.box}>
+                        <View style={styles.iconBox}>
+                            <MaterialIcons name="phone" size={24} color='#1A3A5C'/>
+                        </View>
+
+                        <View style={styles.contentBox}>
+                            <Text style={{color: '#2E6DA4'}}>Our 24X7 Customer Service</Text>
+                            <Text style= {{color: '#1A3A5C', fontWeight: '600', fontSize: 14}}>+91 7314342979</Text>
+                        </View>
                     </View>
 
-                    <View style={styles.contentBox}>
-                        <Text style={{color: '#2E6DA4'}}>Our 24X7 Customer Service</Text>
-                        <Text style= {{color: '#1A3A5C', fontWeight: '600', fontSize: 14}}>+91 7314342979</Text>
-                    </View>
-                </View>
+                    <View style={styles.box}>
+                        <View style={styles.iconBox}>
+                            <MaterialIcons name="email" size={24} color='#1A3A5C'/>
+                        </View>
 
-                <View style={styles.box}>
-                    <View style={styles.iconBox}>
-                        <MaterialIcons name="email" size={24} color='#1A3A5C'/>
-                    </View>
-
-                    <View style={styles.contentBox}>
-                        <Text style={{color: '#2E6DA4'}}>Write us at</Text>
-                        <Text style={{color:'#1A3A5C', fontWeight: '600', fontSize: 14}}>support@rapiconinfra.com</Text>
-                    </View>
-                </View>
-
-            
-
-                <View style={styles.queryContainer}>
-                    <Text style={styles.headingText}>Contact us</Text>
-
-                    <View style={styles.queryBox}>
-                        <MaterialIcons name="person" size={24} color='#1A3A5C' style={styles.iconStyle}/>
-                        <TextInput
-                            value={form.name}
-                            placeholder="Enter name"
-                            keyboardType="text"
-                            onChangeText={(text) => handleOnChange('name', text)}
-                            style={styles.input}
-                            error = {errors.name}
-                        />
+                        <View style={styles.contentBox}>
+                            <Text style={{color: '#2E6DA4'}}>Write us at</Text>
+                            <Text style={{color:'#1A3A5C', fontWeight: '600', fontSize: 14}}>support@rapiconinfra.com</Text>
+                        </View>
                     </View>
 
-                    <View style={styles.queryBox}>
-                        <MaterialIcons name="phone" size={24} color='#1A3A5C' style={styles.iconStyle}/>
-                        <TextInput
-                            value={form.phone}
-                            placeholder="Enter phone"
-                            keyboardType="phone-pad"
-                            onChangeText={(text) => handleOnChange('phone', text)}
-                            style={styles.input}
-                            maxLength={10}
-                            error = {errors.phone}
-                        />
+                
+
+                    <View style={styles.queryContainer}>
+                        <Text style={styles.headingText}>Contact us</Text>
+
+                        <View style={styles.queryBox}>
+                            <MaterialIcons name="person" size={24} color='#1A3A5C' style={styles.iconStyle}/>
+                            <TextInput
+                                value={form.name}
+                                placeholder="Enter name"
+                                keyboardType="text"
+                                onChangeText={(text) => handleOnChange('name', text)}
+                                style={styles.input}
+                                error = {errors.name}
+                            />
+                        </View>
+
+                        <View style={styles.queryBox}>
+                            <MaterialIcons name="phone" size={24} color='#1A3A5C' style={styles.iconStyle}/>
+                            <TextInput
+                                value={form.phone}
+                                placeholder="Enter phone"
+                                keyboardType="phone-pad"
+                                onChangeText={(text) => handleOnChange('phone', text)}
+                                style={styles.input}
+                                maxLength={10}
+                                error = {errors.phone}
+                            />
+                        </View>
+
+                        <View style={styles.queryBox}>
+                            <MaterialIcons name="email" size={24} color='#1A3A5C' style={styles.iconStyle}/>
+                            <TextInput
+                                value={form.email}
+                                placeholder="Enter email"
+                                keyboardType="text"
+                                onChangeText={(text) => handleOnChange('email', text)}
+                                style={styles.input}
+                                error = {errors.email}
+                            />
+                        </View>
+
+                        <View style={styles.queryBox}>
+                            <MaterialIcons name="message" size={24} color='#1A3A5C' style={styles.iconStyle}/>
+                            <TextInput
+                                value={form.message}
+                                placeholder="Enter message"
+                                keyboardType="text"
+                                onChangeText={(text) => handleOnChange('message', text)}
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <TouchableOpacity style= {styles.bookNowBox} onPress={handleOnSubmit}>
+                            <Text style={styles.bookNowBtn}>Submit</Text>
+                        </TouchableOpacity>
+
                     </View>
 
-                    <View style={styles.queryBox}>
-                        <MaterialIcons name="email" size={24} color='#1A3A5C' style={styles.iconStyle}/>
-                        <TextInput
-                            value={form.email}
-                            placeholder="Enter email"
-                            keyboardType="text"
-                            onChangeText={(text) => handleOnChange('email', text)}
-                            style={styles.input}
-                            error = {errors.email}
-                        />
+                    <View style={styles.queryContainer}>
+                        <Text style={styles.headingText}>How to become a seller</Text>
+
+                        <Text style={styles.points}>1. Go to our official website: https://rapiconinfra.com</Text>
+                        <Text style={styles.points}>2. Click on start selling at the top right corner</Text>
+                        <Text style={styles.points}>3. On landing page click on get started button and create account</Text>
+                        <Text style={styles.points}>4. Login your account to upload, and manage designs</Text>
+
+                        <TouchableOpacity style= {styles.bookNowBox} onPress={()=> Linking.openURL('https://rapiconinfra.com/vendor-landing.html')}>
+                            <Text style={styles.bookNowBtn}>Go to website</Text>
+                        </TouchableOpacity>
                     </View>
-
-                    <View style={styles.queryBox}>
-                        <MaterialIcons name="message" size={24} color='#1A3A5C' style={styles.iconStyle}/>
-                        <TextInput
-                            value={form.message}
-                            placeholder="Enter message"
-                            keyboardType="text"
-                            onChangeText={(text) => handleOnChange('message', text)}
-                            style={styles.input}
-                        />
-                    </View>
-
-                    <TouchableOpacity style= {styles.bookNowBox} onPress={handleOnSubmit}>
-                        <Text style={styles.bookNowBtn}>Submit</Text>
-                    </TouchableOpacity>
-
-                </View>
-
-                <View style={styles.queryContainer}>
-                    <Text style={styles.headingText}>How to become a seller</Text>
-
-                    <Text style={styles.points}>1. Go to our official website: https://rapiconinfra.com</Text>
-                    <Text style={styles.points}>2. Click on start selling at the top right corner</Text>
-                    <Text style={styles.points}>3. On landing page click on get started button and create account</Text>
-                    <Text style={styles.points}>4. Login your account to upload, and manage designs</Text>
-
-                    <TouchableOpacity style= {styles.bookNowBox} onPress={()=> Linking.openURL('https://rapiconinfra.com/vendor-landing.html')}>
-                        <Text style={styles.bookNowBtn}>Go to website</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
         </SafeAreaView>
     );
 };

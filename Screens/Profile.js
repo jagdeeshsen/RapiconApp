@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { userService } from "../Service/UserService";
 import { getAuthData, removeAuthData } from "../utils/authStorage";
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -134,110 +134,113 @@ const Profile= ({ setIsLoggedIn }) => {
 
     
     return (
-        <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-            <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
-                <View style={styles.header}>
-                    <TouchableOpacity style={styles.touchableOpacity} onPress={()=> navigation.goBack()}>
-                        <Ionicons name="chevron-back" size={22} color='#1A2233'/>
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+                <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+                    <View style={styles.header}>
+                        <TouchableOpacity style={styles.touchableOpacity} onPress={()=> navigation.goBack()}>
+                            <Ionicons name="chevron-back" size={22} color='#1A2233'/>
+                        </TouchableOpacity>
+
+                        <Text style={styles.title}>My Profile</Text>
+
+                        <TouchableOpacity style={styles.editIcon} onPress={()=> setIsEditable(true)}>
+                            <Ionicons name="create-outline" size={22} color='#1A2233'/>
+                        </TouchableOpacity>
+                    </View>
+                    
+                    <Text style={styles.heading}>Name</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.fullName}
+                        editable={isEditable}
+                        placeholder="Enter name"
+                        onChangeText={(text) => handleOnChange('fullName', text)}
+                    />
+
+                    <Text style={styles.heading}>Phone</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: "#ccc"}]} 
+                        value={user.phone}
+                        editable={false}
+                        placeholder="Enter phone"
+                        onChangeText={(text) => handleOnChange('phone', text)}
+                    />
+
+                    <Text style={styles.heading}>Email</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.email}
+                        editable={isEditable}
+                        placeholder="Enter email"
+                        onChangeText={(text) => handleOnChange('email', text)}
+                    />
+
+                    <Text style={styles.heading}>Street</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.streetAddress}
+                        editable={isEditable}
+                        placeholder="Enter street"
+                        onChangeText={(text) => handleOnChange('streetAddress', text)}
+                    />
+
+                    <Text style={styles.heading}>City</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.city}
+                        editable={isEditable}
+                        placeholder="Enter city"
+                        onChangeText={(text) => handleOnChange('city', text)}
+                    />
+
+                    <Text style={styles.heading}>State</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.state}
+                        editable={isEditable}
+                        placeholder="Enter state"
+                        onChangeText={(text) => handleOnChange('state', text)}
+                    />
+
+                    <Text style={styles.heading}>Country</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.country}
+                        editable={isEditable}
+                        placeholder="Enter country"
+                        onChangeText={(text) => handleOnChange('country', text)}
+                    />
+
+                    <Text style={styles.heading}>Zipcode</Text>
+                    <TextInput 
+                        style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
+                        value={user.zipCode}
+                        editable={isEditable}
+                        placeholder="Enter zipcode"
+                        onChangeText={(text) => handleOnChange('zipCode', text)}
+                    />
+
+                    <TouchableOpacity style={styles.deleteButton} onPress={isEditable? handleSave : handleDelete}>
+                        <Text style={[styles.btnText, {color : isEditable ? '#1A3A5C' : 'red'}]}>
+                            {isEditable ? 'Save' : 'Delete Account'}
+                        </Text>
                     </TouchableOpacity>
 
-                    <Text style={styles.title}>My Profile</Text>
+                    <Text style={styles.deleteWarning}>{ isEditable ? '' : 'Deleting your account will remove all your orders and all activities.'}</Text>
 
-                    <TouchableOpacity style={styles.editIcon} onPress={()=> setIsEditable(true)}>
-                        <Ionicons name="create-outline" size={22} color='#1A2233'/>
-                    </TouchableOpacity>
-                </View>
-                
-                <Text style={styles.heading}>Name</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.fullName}
-                    editable={isEditable}
-                    placeholder="Enter name"
-                    onChangeText={(text) => handleOnChange('fullName', text)}
-                />
-
-                <Text style={styles.heading}>Phone</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: "#ccc"}]} 
-                    value={user.phone}
-                    editable={false}
-                    placeholder="Enter phone"
-                    onChangeText={(text) => handleOnChange('phone', text)}
-                />
-
-                <Text style={styles.heading}>Email</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.email}
-                    editable={isEditable}
-                    placeholder="Enter email"
-                    onChangeText={(text) => handleOnChange('email', text)}
-                />
-
-                <Text style={styles.heading}>Street</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.streetAddress}
-                    editable={isEditable}
-                    placeholder="Enter street"
-                    onChangeText={(text) => handleOnChange('streetAddress', text)}
-                />
-
-                <Text style={styles.heading}>City</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.city}
-                    editable={isEditable}
-                    placeholder="Enter city"
-                    onChangeText={(text) => handleOnChange('city', text)}
-                />
-
-                <Text style={styles.heading}>State</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.state}
-                    editable={isEditable}
-                    placeholder="Enter state"
-                    onChangeText={(text) => handleOnChange('state', text)}
-                />
-
-                <Text style={styles.heading}>Country</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.country}
-                    editable={isEditable}
-                    placeholder="Enter country"
-                    onChangeText={(text) => handleOnChange('country', text)}
-                />
-
-                <Text style={styles.heading}>Zipcode</Text>
-                <TextInput 
-                    style={[styles.inputBox, {borderColor: isEditable? '#000' : "#ccc"}]} 
-                    value={user.zipCode}
-                    editable={isEditable}
-                    placeholder="Enter zipcode"
-                    onChangeText={(text) => handleOnChange('zipCode', text)}
-                />
-
-                <TouchableOpacity style={styles.deleteButton} onPress={isEditable? handleSave : handleDelete}>
-                    <Text style={[styles.btnText, {color : isEditable ? '#1A3A5C' : 'red'}]}>
-                        {isEditable ? 'Save' : 'Delete Account'}
-                    </Text>
-                </TouchableOpacity>
-
-                <Text style={styles.deleteWarning}>{ isEditable ? '' : 'Deleting your account will remove all your orders and all activities.'}</Text>
-
-                <ConfirmModal 
-                    visible={modalVisible}
-                    message={modalType === 'confirm' ? 'Warning: This action is parmanent. Are you sure you want to delete your account.' : 'We have sent OTP to your registered number.'}
-                    type={modalType}
-                    title={modalType === 'confirm' ? 'Confirm' : 'Prompt'}
-                    inputValue={otp}
-                    setInputValue={setOtp}
-                    onConfirm={handleConfirm}
-                    onCancel={()=> setModalVisible(false)}/>
-            </ScrollView>
+                    <ConfirmModal 
+                        visible={modalVisible}
+                        message={modalType === 'confirm' ? 'Warning: This action is parmanent. Are you sure you want to delete your account.' : 'We have sent OTP to your registered number.'}
+                        type={modalType}
+                        title={modalType === 'confirm' ? 'Confirm' : 'Prompt'}
+                        inputValue={otp}
+                        setInputValue={setOtp}
+                        onConfirm={handleConfirm}
+                        onCancel={()=> setModalVisible(false)}/>
+                </ScrollView>
+            </View>
         </SafeAreaView>
     );
 };
@@ -245,7 +248,7 @@ const Profile= ({ setIsLoggedIn }) => {
 const styles= StyleSheet.create({
 
     container:{
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#F8F9FB',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -257,7 +260,7 @@ const styles= StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        padding: 15,
+        padding: 10,
     },
 
     heading:{
@@ -272,7 +275,7 @@ const styles= StyleSheet.create({
     inputBox:{
         width: '90%',
         borderWidth: 0.5,
-        padding: 12,
+        padding: 10,
         borderRadius: 12,
         fontSize: 14,
         backgroundColor: "#FFFFFF",
@@ -282,7 +285,7 @@ const styles= StyleSheet.create({
 
     deleteButton:{
         width: '90%',
-        padding: 12,
+        padding: 10,
         borderRadius: 12,
         backgroundColor: '#FFFFFF',
         marginTop: 20,

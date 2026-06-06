@@ -118,7 +118,7 @@ const Order= ({ setIsLoggedIn})=>{
             const response = await PhonePePaymentSDK.startTransaction(JSON.stringify(payload), APP_SCHEME);
             console.log(response);
 
-            if (response.status === 'CONCLUDED') {
+            if (response.status === 'SUCCESS') {
                 await verifyOrderOnServer(installmentRequest.merchantOrderId, installmentRequest.orderId);
             } else if (response.status === 'FAILURE') {
                 Alert.alert('Payment cancelled', 'You cancelled the payment.');
@@ -178,8 +178,8 @@ const Order= ({ setIsLoggedIn})=>{
 
 
     return (
-        <SafeAreaView style={{flex:1, backgroundColor: '#F8F9FB'}}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
+        <SafeAreaView edges={[]} style={{flex:1, backgroundColor: '#F8F9FB'}}>
+            <StatusBar barStyle="light-content"/>
             <FlatList
                 data={orders} 
                 renderItem={ ({ item }) => <OrderHistoryBox item={item} installmentCheckout = {handleInstallmentCheckout} payingId={payingId}/>}

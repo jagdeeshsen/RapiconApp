@@ -77,78 +77,79 @@ const SignUp= ()=>{
     const isFormValid= form.person && form.email && form.phone && agreed && !errors.email && !errors.phone && !errors.person;
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
-            <View style={styles.backBtn}>
-                <CustomBackBtn screen='Welcome Screen'/>
-            </View>
-            <Text style={styles.heading}>Create Account</Text>
-            <Text style={styles.subHeading}>Bring your construction vision to life with simple tools for planning and progress.</Text>
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style = {styles.container}>
+                <View style={styles.backBtn}>
+                    <CustomBackBtn screen='Welcome Screen'/>
+                </View>
+                <Text style={styles.heading}>Create Account</Text>
+                <Text style={styles.subHeading}>Bring your construction vision to life with simple tools for planning and progress.</Text>
 
-            <Text style={styles.mainHeading}>Full Name *</Text>
-            <IntputBox
-                icon='person' 
-                placeholder='Full name' 
-                OnChangeText={handleOnChange}
-                value={form.person}
-                error={errors.person}
-            />
+                <Text style={styles.mainHeading}>Full Name *</Text>
+                <IntputBox
+                    icon='person' 
+                    placeholder='Full name' 
+                    OnChangeText={handleOnChange}
+                    value={form.person}
+                    error={errors.person}
+                />
 
-            <Text style={styles.mainHeading}>Email *</Text>
-            <IntputBox 
-                icon='email' 
-                placeholder='Email address' 
-                keyboardType={'email-address'} 
-                OnChangeText={handleOnChange}
-                value={form.email}
-                error={errors.email}
-            />
+                <Text style={styles.mainHeading}>Email *</Text>
+                <IntputBox 
+                    icon='email' 
+                    placeholder='Email address' 
+                    keyboardType={'email-address'} 
+                    OnChangeText={handleOnChange}
+                    value={form.email}
+                    error={errors.email}
+                />
 
-            <Text style={styles.mainHeading}>Phone *</Text>
-            <IntputBox 
-                icon='phone' 
-                placeholder='phone' 
-                keyboardType='phone-pad' 
-                OnChangeText={handleOnChange} 
-                value={form.phone}
-                maxLen={10}
-                error={errors.phone}
-            />
+                <Text style={styles.mainHeading}>Phone *</Text>
+                <IntputBox 
+                    icon='phone' 
+                    placeholder='phone' 
+                    keyboardType='phone-pad' 
+                    OnChangeText={handleOnChange} 
+                    value={form.phone}
+                    maxLen={10}
+                    error={errors.phone}
+                />
 
-            <View style={styles.TAndCContainer}>
+                <View style={styles.TAndCContainer}>
+                    <TouchableOpacity 
+                        style={[styles.checkBox, agreed && { backgroundColor: '#1A3A5C', borderColor: '#E2E8F0' }]}
+                        onPress={() => setAgreed(prev=> !prev)}
+                    >
+                        {agreed && <Text style={{ color: '#FFFFFF', fontSize: 16 }}>✓</Text>}
+                    </TouchableOpacity>
+
+
+                    <Text style= {styles.TAndCText}> I agree to the </Text>
+                    <TouchableOpacity onPress={()=> Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}>
+                        <Text style={styles.clickableText}> Terms of Service </Text>
+                    </TouchableOpacity>
+                    <Text style={styles.TAndCText}> and </Text>
+                    <TouchableOpacity onPress={()=> Linking.openURL('https://rapiconinfra.com/privacy-policy.html')}>
+                        <Text style={styles.clickableText}> Privacy Policy. </Text>
+                    </TouchableOpacity>
+
+                </View>
+
                 <TouchableOpacity 
-                    style={[styles.checkBox, agreed && { backgroundColor: '#1A3A5C', borderColor: '#E2E8F0' }]}
-                    onPress={() => setAgreed(prev=> !prev)}
-                >
-                    {agreed && <Text style={{ color: '#FFFFFF', fontSize: 16 }}>✓</Text>}
+                    style={[styles.registerBtn, {backgroundColor: isFormValid ? '#1A3A5C' : '#FFFFFF'}]}
+                    disabled={!isFormValid}
+                    onPress={handleOnCreateUser}>
+                    <Text style={[styles.btnText, {color: isFormValid ? '#FFFFFF' : '#1A3A5C'}]}>Create Account</Text>
                 </TouchableOpacity>
 
-
-                <Text style= {styles.TAndCText}> I agree to the </Text>
-                <TouchableOpacity onPress={()=> Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}>
-                    <Text style={styles.clickableText}> Terms of Service </Text>
-                </TouchableOpacity>
-                <Text style={styles.TAndCText}> and </Text>
-                <TouchableOpacity onPress={()=> Linking.openURL('https://rapiconinfra.com/privacy-policy.html')}>
-                    <Text style={styles.clickableText}> Privacy Policy. </Text>
-                </TouchableOpacity>
-
+                <View style={styles.TAndCContainer}>
+                    <Text style={styles.TAndCText}>Already have an account? </Text>
+                    <TouchableOpacity onPress={()=> navigation.navigate('Sign In')}>
+                        <Text style={styles.clickableText}>Sign in here</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-
-            <TouchableOpacity 
-                style={[styles.registerBtn, {backgroundColor: isFormValid ? '#1A3A5C' : '#FFFFFF'}]}
-                disabled={!isFormValid}
-                onPress={handleOnCreateUser}>
-                <Text style={[styles.btnText, {color: isFormValid ? '#FFFFFF' : '#1A3A5C'}]}>Create Account</Text>
-            </TouchableOpacity>
-
-            <View style={styles.TAndCContainer}>
-                <Text style={styles.TAndCText}>Already have an account? </Text>
-                <TouchableOpacity onPress={()=> navigation.navigate('Sign In')}>
-                    <Text style={styles.clickableText}>Sign in here</Text>
-                </TouchableOpacity>
-            </View>
-
         </SafeAreaView>
     );
 };

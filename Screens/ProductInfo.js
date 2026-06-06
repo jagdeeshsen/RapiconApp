@@ -22,7 +22,6 @@ const ProductInfo=({ route })=>{
       const design= await ProductService.getDesignById(productId);
       setProduct(design);
     }catch(e){
-      console.log("design not found"+ e.message);
       setError('Design not found.', e.message);
     }
   };
@@ -70,80 +69,82 @@ const ProductInfo=({ route })=>{
     };
 
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-        <StatusBar barStyle="light-content" backgroundColor="#1A3A5C"/>
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
+      <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+        <StatusBar barStyle="light-content"/>
+        <View style={{flex:1, backgroundColor: '#F8F9FB'}}>
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 10}}>
 
-          <ImageCarousel urls = {imageUrls}/>
+            <ImageCarousel urls = {imageUrls}/>
 
-          <View style={styles.contentBox}>
-            <Text style={styles.categoryBadge}>
-              {product.designType === 'Residential' ? product.designCategory : product.designType}
-            </Text>
-            <Text style={styles.priceText}>
-              Price:  ₹{formatePrice(product.builtUpArea*5)}
-            </Text>
-          </View>
-
-          <Text style={styles.heading}>Description:</Text>
-
-          <View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}>Design Name :</Text>
-              <Text style={styles.fieldValue}> {product.designType === 'Residential' ? product.designCategory : product.designType}</Text>
+            <View style={styles.contentBox}>
+              <Text style={styles.categoryBadge}>
+                {product.designType === 'Residential' ? product.designCategory : product.designType}
+              </Text>
+              <Text style={styles.priceText}>
+                Price:  ₹{formatePrice(product.builtUpArea*5)}
+              </Text>
             </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}> Design Type :</Text>
-              <Text style={styles.fieldValue}> {product.designType}</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}> Plot Size :</Text>
-              <Text style={styles.fieldValue}> {product.width}X{product.length}</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}> Total Area :</Text>
-              <Text style={styles.fieldValue}> {product.totalArea}</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}> Built-up Area :</Text>
-              <Text style={styles.fieldValue}> {product.builtUpArea}</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}> Plot Facing :</Text>
-              <Text style={styles.fieldValue}> {product.plotFacing}</Text>
-            </View>
-            <View style={styles.infoBox}>
-              <Text style={styles.fieldLabel}> Plot Location :</Text>
-              <Text style={styles.fieldValue}> {product.plotLocation || 'Center'}</Text>
-            </View>
-          </View>
 
-          <Text style={styles.heading}>Floor Details:</Text>
+            <Text style={styles.heading}>Description:</Text>
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10, alignItems: 'center'}}>
-            <DesignInfoBox title='Floor' quantity={floorArr.length}/>
-            <DesignInfoBox title='Bedroom' quantity={totals.bedrooms}/>
-            <DesignInfoBox title='Bathroom' quantity={totals.bathrooms}/>
-          </View>
+            <View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}>Design Name :</Text>
+                <Text style={styles.fieldValue}> {product.designType === 'Residential' ? product.designCategory : product.designType}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}> Design Type :</Text>
+                <Text style={styles.fieldValue}> {product.designType}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}> Plot Size :</Text>
+                <Text style={styles.fieldValue}> {product.width}X{product.length}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}> Total Area :</Text>
+                <Text style={styles.fieldValue}> {product.totalArea}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}> Built-up Area :</Text>
+                <Text style={styles.fieldValue}> {product.builtUpArea}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}> Plot Facing :</Text>
+                <Text style={styles.fieldValue}> {product.plotFacing}</Text>
+              </View>
+              <View style={styles.infoBox}>
+                <Text style={styles.fieldLabel}> Plot Location :</Text>
+                <Text style={styles.fieldValue}> {product.plotLocation || 'Center'}</Text>
+              </View>
+            </View>
 
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10, alignItems: 'center'}}>
-            <DesignInfoBox title='Kitchen' quantity={totals.kitchen}/>
-            <DesignInfoBox title='Hall' quantity={totals.hall}/>
-            <DesignInfoBox title='Parking' quantity={product.parking} />
-          </View>
+            <Text style={styles.heading}>Floor Details:</Text>
 
-          <Text style={styles.heading}>Floor Plan:</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10, alignItems: 'center'}}>
+              <DesignInfoBox title='Floor' quantity={floorArr.length}/>
+              <DesignInfoBox title='Bedroom' quantity={totals.bedrooms}/>
+              <DesignInfoBox title='Bathroom' quantity={totals.bathrooms}/>
+            </View>
 
-          <View style={styles.floorPlan}>
-            { product.twoDPlanUrls?.map((url, index) => (
-              <FloorPlan  key={index} floor={index+1} url={url}/>
-            ))}
-          </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10, alignItems: 'center'}}>
+              <DesignInfoBox title='Kitchen' quantity={totals.kitchen}/>
+              <DesignInfoBox title='Hall' quantity={totals.hall}/>
+              <DesignInfoBox title='Parking' quantity={product.parking} />
+            </View>
 
-          <View style={styles.bottomWrapper}>
-            <CustomBtn title={'See Plans'} onPress={()=> navigation.navigate('Package Details', {itemId : product.id})} />
-          </View>
-        </ScrollView>
+            <Text style={styles.heading}>Floor Plan:</Text>
+
+            <View style={styles.floorPlan}>
+              { product.twoDPlanUrls?.map((url, index) => (
+                <FloorPlan  key={index} floor={index+1} url={url}/>
+              ))}
+            </View>
+
+            <View style={styles.bottomWrapper}>
+              <CustomBtn title={'See Packages'} onPress={()=> navigation.navigate('Package Details', {itemId : product.id})} />
+            </View>
+          </ScrollView>
+        </View>
       </SafeAreaView>
       
     );
@@ -193,12 +194,12 @@ const styles= StyleSheet.create({
 
   bottomWrapper:{
     width: '100%',
-    height: 100,
-    backgroundColor: 'white',
+    backgroundColor: '#F8F9FB',
     alignItems: 'baseline',
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 10,
+    marginBottom: 10,
   },
 
   descriptionText:{
