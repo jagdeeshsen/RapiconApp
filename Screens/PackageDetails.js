@@ -131,90 +131,87 @@ const PackageDetails=({ route })=>{
     }
 
     return (
-	<>
-	<StatusBar barStyle="light-content" />
-        <SafeAreaView  edges = {[ 'left', 'right' ]} style={{ flex: 1, backgroundColor: '#F8F9FB'}}>
+        <SafeAreaView edges={[]} style={{flex: 1, backgroundColor: '#F8F9FB'}}>
             <ScrollView 
-            showsVerticalScrollIndicator= {false}
-            contentContainerStyle={{padding: 8}}>
-                <Text style={styles.headingText}>Choose Your Package </Text>
-                <View style={styles.packageCotainer}>
-                    <PackageBox
-                        item={packages[0]} 
-                        color={'#1A3A5C'}
-                        isSelected={selectedPackage?.id === packages[0].id}
-                        onPress= {()=>setSelectedPackage(packages[0])}
-                    />
+                showsVerticalScrollIndicator= {false}
+                contentContainerStyle={{padding: 10}}>
+                    <Text style={styles.headingText}>Choose Your Package </Text>
+                    <View style={styles.packageCotainer}>
+                        <PackageBox
+                            item={packages[0]} 
+                            color={'#1A3A5C'}
+                            isSelected={selectedPackage?.id === packages[0].id}
+                            onPress= {()=>setSelectedPackage(packages[0])}
+                        />
 
-                    <PackageBox
-                        item={packages[1]} 
-                        color={'#2563EB'}
-                        isSelected={selectedPackage?.id === packages[1].id}
-                        onPress= {()=>setSelectedPackage(packages[1])}
-                    />
-                </View>
-                <View style={styles.packageCotainer}>
-                    <PackageBox 
-                        item={packages[2]} 
-                        color={'#7C3AED'}
-                        isSelected={selectedPackage?.id === packages[2].id}
-                        onPress= {()=>setSelectedPackage(packages[2])}
-                    />
-                    <PackageBox 
-                        item={packages[3]} 
-                        color={'#D4A017'}
-                        isSelected={selectedPackage?.id === packages[3].id}
-                        onPress= {()=>setSelectedPackage(packages[3])}
-                    />
-                </View>
-                
-                <View style={styles.packageSummary}>
-                    <Text style={styles.headingText}>Package Summary:</Text>
-                    <View style={styles.detailComponent}>
-                        <Text style={styles.fieldLabel}>Product:</Text>
-                        <Text style={styles.fieldValue}>{ product.designType === 'Residential' ? product.designCategory : product.designType }</Text>
+                        <PackageBox
+                            item={packages[1]} 
+                            color={'#2563EB'}
+                            isSelected={selectedPackage?.id === packages[1].id}
+                            onPress= {()=>setSelectedPackage(packages[1])}
+                        />
                     </View>
-                    <View style={styles.detailComponent}>
-                        <Text style={styles.fieldLabel}>Buit-up Area:</Text>
-                        <Text style={styles.fieldValue}> {formatPrice(product.builtUpArea)} sq.ft.</Text>
-                    </View>
-                    <View style={styles.detailComponent}>
-                        <Text style={styles.fieldLabel}>Package:</Text>
-                        <Text style={styles.fieldValue}> {selectedPackage.name}</Text>
-                    </View>
-                    <View style={styles.detailComponent}>
-                        <Text style={styles.fieldLabel}>Price:</Text>
-                        <Text style={styles.fieldValue}> ₹ {selectedPackage.price} /sq.f.t</Text>
-                    </View>
-                    <View style={styles.line}/>
-                    <View style={styles.detailComponent}>
-                        <Text style={styles.fieldValue}>Total Price:</Text>
-                        <Text style={styles.priceText}> ₹ {formatPrice(product.builtUpArea*selectedPackage.price)}</Text>
+                    <View style={styles.packageCotainer}>
+                        <PackageBox 
+                            item={packages[2]} 
+                            color={'#7C3AED'}
+                            isSelected={selectedPackage?.id === packages[2].id}
+                            onPress= {()=>setSelectedPackage(packages[2])}
+                        />
+                        <PackageBox 
+                            item={packages[3]} 
+                            color={'#D4A017'}
+                            isSelected={selectedPackage?.id === packages[3].id}
+                            onPress= {()=>setSelectedPackage(packages[3])}
+                        />
                     </View>
                     
-                </View>
-                
-                <View style={styles.bottomBtnsWrapper}>
-                    <TouchableOpacity 
-                        onPress={()=> navigation.navigate('bottomTab', {screen: 'Cart'})}
-                        style={styles.cardBox}>
-                        <MaterialCommunityIcons
-                            name="cart-plus"
-                            size={24}
-                            color='#000'>
+                    <View style={styles.packageSummary}>
+                        <Text style={styles.headingText}>Package Summary:</Text>
+                        <View style={styles.detailComponent}>
+                            <Text style={styles.fieldLabel}>Product:</Text>
+                            <Text style={styles.fieldValue}>{ product.designType === 'Residential' ? product.designCategory : product.designType }</Text>
+                        </View>
+                        <View style={styles.detailComponent}>
+                            <Text style={styles.fieldLabel}>Buit-up Area:</Text>
+                            <Text style={styles.fieldValue}> {formatPrice(product.builtUpArea)} sq.ft.</Text>
+                        </View>
+                        <View style={styles.detailComponent}>
+                            <Text style={styles.fieldLabel}>Package:</Text>
+                            <Text style={styles.fieldValue}> {selectedPackage.name}</Text>
+                        </View>
+                        <View style={styles.detailComponent}>
+                            <Text style={styles.fieldLabel}>Price:</Text>
+                            <Text style={styles.fieldValue}> ₹ {selectedPackage.price} /sq.f.t</Text>
+                        </View>
+                        <View style={styles.line}/>
+                        <View style={styles.detailComponent}>
+                            <Text style={styles.fieldValue}>Total Price:</Text>
+                            <Text style={styles.priceText}> ₹ {formatPrice(product.builtUpArea*selectedPackage.price)}</Text>
+                        </View>
+                        
+                    </View>
+                    
+                    <View style={styles.bottomBtnsWrapper}>
+                        <TouchableOpacity 
+                            onPress={()=> navigation.navigate('bottomTab', {screen: 'Cart'})}
+                            style={styles.cardBox}>
+                            <MaterialCommunityIcons
+                                name="cart-plus"
+                                size={24}
+                                color='#000'>
 
-                        </MaterialCommunityIcons>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={styles.customBtn} 
-                        onPress={addToCart}
-                        disabled={isDisabled}>
-                        <Text style={styles.btnText}>Add To Cart</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+                            </MaterialCommunityIcons>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.customBtn} 
+                            onPress={addToCart}
+                            disabled={isDisabled}>
+                            <Text style={styles.btnText}>Add To Cart</Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
         </SafeAreaView>
-	</>
     );
 };
 
@@ -226,7 +223,7 @@ const styles= StyleSheet.create({
 
     packageSummary:{
         width: '100%',
-        backgroundColor: '#F8F9FB',
+        backgroundColor: '#FFFFFF',
         padding: 10,
         marginTop: 10,
         alignSelf: 'center',
@@ -280,7 +277,7 @@ const styles= StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        backgroundColor: '#F8F9FB',
+        backgroundColor: '#FFFFFF',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: '#E2E8F0',
@@ -310,7 +307,7 @@ const styles= StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        backgroundColor: '#F8F9FB',
+        backgroundColor: '#FFFFFF',
         borderWidth: 1,
         borderColor: '#E2E8F0'
     },

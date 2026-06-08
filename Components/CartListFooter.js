@@ -63,6 +63,8 @@ const CartListFooter=({ price, onCheckout, onInstallmentCheckout, paying })=>{
                     : <Text style={styles.secondaryBtnText}>Pay Installment</Text>
                 }
             </TouchableOpacity>
+            <Text style={{fontSize: 16, color: '#6B7A99', marginBottom: 5}}>For cash on delivery. Please contact us.</Text>
+            <Text style={{fontSize: 12, color: '#6B7A99'}}>Note: Installment option allows you to pay in 10 monthly installments.</Text>
             
         </View>
     );
@@ -79,7 +81,7 @@ const styles= StyleSheet.create({
     orderSummary:{
         width: '95%',
         height: 'auto',
-        backgroundColor: '#F8F9FB',
+        backgroundColor: '#FFFFFF',
         margin: 10,
         padding: 8,
         alignSelf: 'center',

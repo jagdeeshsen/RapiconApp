@@ -1,4 +1,4 @@
-package com.rapiconapp
+package com.rapicon.app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

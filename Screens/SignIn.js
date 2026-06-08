@@ -45,45 +45,41 @@ const SignIn=()=>{
     const isPhoneValid= phone && !error;
 
     return (
-	<>
-		{/* Top status bar background */}
-  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
-    			<StatusBar barStyle="light-content" />
-  		</SafeAreaView>
-        <SafeAreaView edges= {[ 'left', 'right', 'bottom' ]} style={styles.container}>
-            <View style={styles.backBtn}>
-                <CustomBackBtn screen='Welcome Screen'/>
-            </View>
-            <Text style={styles.heading}>Log In</Text>
-            <Text style={styles.subHeading}>Enter your phone number to securly access your account and manage your service.</Text>
-            <Text style={styles.mainHeading}>Phone *</Text>
-            <IntputBox 
-                icon='phone' 
-                placeholder='Enter phone' 
-                keyboardType='phone-pad' 
-                OnChangeText={handleOnChange}
-                value={phone}
-                maxLen={10}
-                error={error}
-            /> 
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style={styles.container}>
+                <View style={styles.backBtn}>
+                    <CustomBackBtn screen='Welcome Screen'/>
+                </View>
+                <Text style={styles.heading}>Log In</Text>
+                <Text style={styles.subHeading}>Enter your phone number to securly access your account and manage your service.</Text>
+                <Text style={styles.mainHeading}>Phone *</Text>
+                <IntputBox 
+                    icon='phone' 
+                    placeholder='Enter phone' 
+                    keyboardType='phone-pad' 
+                    OnChangeText={handleOnChange}
+                    value={phone}
+                    maxLen={10}
+                    error={error}
+                /> 
 
-            <TouchableOpacity 
-                style={[styles.registerBtn, { backgroundColor: isPhoneValid ? '#1A3A5C' : '#FFFFFF'}]}
-                disabled={!isPhoneValid}
-                onPress={handleSendOTP}
-            >
-                <Text style={[styles.btnText, {color: isPhoneValid ? '#FFFFFF' : '#1A3A5C'}]}>Send OTP</Text>
-            </TouchableOpacity>
-
-            <View style={styles.TAndCContainer}>
-                <Text style={{color: '#1A2233'}}>Don't have an account? </Text>
-                <TouchableOpacity onPress={()=> navigation.navigate('Sign Up')}>
-                    <Text style={styles.clickableText}>Sign Up here</Text>
+                <TouchableOpacity 
+                    style={[styles.registerBtn, { backgroundColor: isPhoneValid ? '#1A3A5C' : '#FFFFFF'}]}
+                    disabled={!isPhoneValid}
+                    onPress={handleSendOTP}
+                >
+                    <Text style={[styles.btnText, {color: isPhoneValid ? '#FFFFFF' : '#1A3A5C'}]}>Send OTP</Text>
                 </TouchableOpacity>
-            </View>
 
+                <View style={styles.TAndCContainer}>
+                    <Text style={{color: '#1A2233'}}>Don't have an account? </Text>
+                    <TouchableOpacity onPress={()=> navigation.navigate('Sign Up')}>
+                        <Text style={styles.clickableText}>Sign Up here</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </SafeAreaView>
-	</>
     );
 };
 
@@ -105,7 +101,7 @@ const styles= StyleSheet.create({
     },
 
     backBtn:{
-        margin: 18,
+        margin: 12,
         alignSelf: 'flex-start',
     },
 

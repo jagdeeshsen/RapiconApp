@@ -2,8 +2,9 @@ import { StyleSheet, Text, TouchableOpacity, View, TextInput, StatusBar } from "
 import CustomBackBtn from "../Components/CustomBackBtn";
 import { useEffect, useState } from "react";
 import { userService } from "../Service/UserService";
-import { saveAuthData } from "../utils/authStorage";
+import { saveAuthData, saveRefreshToken } from "../utils/authStorage";
 import { SafeAreaView } from "react-native-safe-area-context";
+import NotificationService from "../Notifications/notificationService";
 
 const OTPScreen= ({ route, setIsLoggedIn })=> {
 
@@ -54,6 +55,9 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
             const result= await userService.varifyOTP(loginData);
 
             await saveAuthData(result.token, result.id, result.fullName, phone);
+            await saveRefreshToken(result.refreshToken);
+            await NotificationService.registerToken();
+            console.log('OTP varified successfully', result);
 
             setError('');
             setOtp('');
@@ -82,51 +86,48 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
     const isOTPValid= otp.length === 6;
 
     return (
-	<>
-		{/* Top status bar background */}
-  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
-    			<StatusBar barStyle="light-content" />
-  		</SafeAreaView>
-        <SafeAreaView  edges = {[ 'left', 'right', 'bottom' ]} style={styles.container}>
-            <View style={styles.backBtn}>
-                <CustomBackBtn screen='Sign In'/>
-            </View>
-            <Text style={styles.heading}>Varify OTP</Text>
-            <Text style={styles.subHeading}>We’ve sent a one-time password to your{' '}
-                <Text style={{fontWeight: '600', color: '#1A3A5C'}}>{phone}</Text> {' '}number.</Text>
-            <Text style={styles.mainHeading}>OTP *</Text>
-            <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#ffffff'}]}>
-                <TextInput 
-                    onChangeText= {(text)=> OnChangeText(text)} 
-                    style={styles.input} 
-                    placeholder='Enter OTP' 
-                    keyboardType='phone-pad'
-                    maxLength={6}
-                />
-            </View>
-            {error ? (
-                <Text style={styles.errorText}>{error}</Text>
-            ) : null }
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style={styles.container}>
+                <View style={styles.backBtn}>
+                    <CustomBackBtn screen='Sign In'/>
+                </View>
+                <Text style={styles.heading}>Varify OTP</Text>
+                <Text style={styles.subHeading}>We’ve sent a one-time password to your{' '}
+                    <Text style={{fontWeight: '600', color: '#1A3A5C'}}>{phone}</Text> {' '}number.</Text>
+                <Text style={styles.mainHeading}>OTP *</Text>
+                <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#ffffff'}]}>
+                    <TextInput 
+                        onChangeText= {(text)=> OnChangeText(text)} 
+                        style={styles.input} 
+                        placeholder='Enter OTP' 
+                        keyboardType='phone-pad'
+                        maxLength={6}
+                    />
+                </View>
+                {error ? (
+                    <Text style={styles.errorText}>{error}</Text>
+                ) : null }
 
-            <TouchableOpacity 
-                style={[styles.registerBtn, { backgroundColor: isOTPValid ? '#1A3A5C' : '#FFFFFF'}]}
-                onPress={handleVarifyOTP}
-                disabled= {!isOTPValid}
-            >
-                <Text style={[styles.btnText, {color: isOTPValid ? '#FFFFFF' : '#1A3A5C'}]}>Verify</Text>
-            </TouchableOpacity>
-
-            <View style={styles.TAndCContainer}>
-                <Text style={{color: '#1A2233'}}>Didn't recieve the OTP? </Text>
                 <TouchableOpacity 
-                    onPress={handleResendOTP}
-                    disabled={isResendDisabled}>
-                    <Text style={[styles.clickableText, {color: isResendDisabled ? '#E8F0FA' : '#1A3A5C'}]}>
-                        { isResendDisabled ? `Resend in ${timer}s` : 'Resend OTP'}</Text>
+                    style={[styles.registerBtn, { backgroundColor: isOTPValid ? '#1A3A5C' : '#FFFFFF'}]}
+                    onPress={handleVarifyOTP}
+                    disabled= {!isOTPValid}
+                >
+                    <Text style={[styles.btnText, {color: isOTPValid ? '#FFFFFF' : '#1A3A5C'}]}>Verify</Text>
                 </TouchableOpacity>
+
+                <View style={styles.TAndCContainer}>
+                    <Text style={{color: '#1A2233'}}>Didn't recieve the OTP? </Text>
+                    <TouchableOpacity 
+                        onPress={handleResendOTP}
+                        disabled={isResendDisabled}>
+                        <Text style={[styles.clickableText, {color: isResendDisabled ? '#E8F0FA' : '#1A3A5C'}]}>
+                            { isResendDisabled ? `Resend in ${timer}s` : 'Resend OTP'}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </SafeAreaView>
-	</>
     );
 };
 
@@ -148,11 +149,6 @@ const styles= StyleSheet.create({
         marginBottom: 15,
         backgroundColor: '#FFFFFF',
     },
-
-   input:{
-	flex: 1,
-	height: 45,
-   },
 
     mainHeading:{
         fontSize: 14,

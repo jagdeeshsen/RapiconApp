@@ -1,4 +1,4 @@
-package com.rapiconapp
+package com.rapicon.app
 
 import android.app.Application
 import com.facebook.react.PackageList

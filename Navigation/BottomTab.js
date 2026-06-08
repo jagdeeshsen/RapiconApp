@@ -30,7 +30,7 @@ const BottomTab=({ setIsLoggedIn })=>{
             tabBarInactiveTintColor: "#B0B8C9",
         })}>
         <Tab.Screen name="Home" component={HomeStack} options={{headerShown: false}}/>
-        <Tab.Screen name="Category" component={Category} options={{ headerStyle:{backgroundColor: '#1A3A5C'}, headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#FFFFFF'}}}/>
+        <Tab.Screen name="Category" component={Category} options={{ headerStyle:{backgroundColor: '#1A3A5C'}, headerTintColor: '#FFF', headerTitleStyle:{fontSize: 18, fontWeight: '600', color: '#FFFFFF'}}}/>
         <Tab.Screen name="Cart" component={Cart} options={{headerShown: false}} />
         <Tab.Screen name="Account" options={{headerShown: false}}>
             {(props) => <AccountStack {...props} setIsLoggedIn={setIsLoggedIn}/>}

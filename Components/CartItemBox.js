@@ -40,14 +40,14 @@ const styles= StyleSheet.create({
     wrapperBox:{
         width: '95%',
         height: 120,
-        backgroundColor: '#F8F9FB',
+        backgroundColor: '#FFFFFF',
         borderRadius: 10,
         margin: 5,
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
         flexDirection: 'row',
-        borderWidth: 0.3,
+        borderWidth: 0.5,
         borderColor: '#E2E8F0',
     },
 

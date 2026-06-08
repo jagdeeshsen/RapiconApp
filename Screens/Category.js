@@ -17,13 +17,12 @@ const Category=()=> {
     const navigation= useNavigation();
 
     return (
-	<>
-	<StatusBar barStyle = 'light-content' />
-        <SafeAreaView  edges = {[ 'left', 'right' ]} style={styles.mainContainer}>
+        <SafeAreaView edges={[]} style={styles.mainContainer}>
+            <StatusBar barStyle="light-content"/>
             <FlatList
                 data={categoryList}
                 renderItem={({ item })=> (
-                    <TouchableOpacity style={styles.categoryBox} onPress={()=> navigation.navigate('Home', {screen: 'AllProduct', params: {product: item}})}>
+                    <TouchableOpacity style={styles.categoryBox} onPress={()=> navigation.navigate('Home', {screen: 'AllProduct'})}>
                         <Image style={styles.categoryImg} source={{uri : item.url }}/>
                         <Text style={styles.title}>{item.name}</Text>
                     </TouchableOpacity>
@@ -31,10 +30,9 @@ const Category=()=> {
                 keyExtractor={(item)=> item.id}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{padding: 8}}
+                contentContainerStyle={{padding: 10}}
             />
         </SafeAreaView>
-	</>
     )
 };
 

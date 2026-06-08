@@ -4,9 +4,6 @@ import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "rea
 
 const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
 
-    const installmentList = item.installmentsList;
-    installmentList.sort((a, b) => a.installmentNumber - b.installmentNumber ); 
-
     const[expandedId, setExpandedId] = useState(null);
 
     const formatPrice =(price) => {
@@ -67,7 +64,7 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
                         <Text style={styles.installmentHeading}>Amount</Text>
                     </View>
                     <View style={styles.line}/>
-                    { installmentList.map( (ins, index) => (
+                    { item.installmentsList?.map( (ins, index) => (
                         <View  key={ins.id.toString()} style={styles.installmentRow}>
                             <Text style={styles.fieldLable}>{index+1}</Text>
                             <Text style={styles.fieldValue}>{formatDate(ins.dueDate)} </Text>
@@ -84,7 +81,7 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
                                 onPress={()=> installmentCheckout(item.id, ins.installmentAmount, ins.id)}>
                                 { payingId === ins.id 
                                     ? <ActivityIndicator color='white'/> 
-                                    : <Text style={{color: ins.unlocked ? '#FFFFFF' : '#6B7A99', fontWeight: '600'}}>{ ins.unlocked && (ins.installmentStatus!= 'PAID') ? 'Pay Now' : ins.installmentStatus}</Text>
+                                    : <Text style={{color: ins.unlocked ? '#FFFFFF' : '#6B7A99', fontWeight: '600'}}>{ins.unlocked && (ins.installmentStatus!= 'PAID') ? 'Pay Now' : ins.installmentStatus}</Text>
                                 }
                             </TouchableOpacity>
                         </View>
@@ -102,7 +99,7 @@ const styles= StyleSheet.create({
         padding: 10,
         borderRadius: 12,
         marginTop: 5,
-        marginBottom: 8,
+        marginBottom: 5,
         backgroundColor: '#FFFFFF',
         alignSelf: 'center',
         borderWidth: 0.5,

@@ -9,12 +9,8 @@ const WelcomeScreen= ()=> {
     const navigation= useNavigation();
 
     return(
-	<>
-		{/* Top status bar background */}
-  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
-    			<StatusBar barStyle="light-content" />
-  		</SafeAreaView>
-        <SafeAreaView edges = {[ 'left', 'right' ]} style={styles.imageContainer}>
+        <SafeAreaView edges={['top']} style={styles.imageContainer}>
+            <StatusBar barStyle="light-content"/>
             <ImageBackground style={styles.image} source={require('../assets/rapicon-welcome-screen.png')}>
 
                 <View style={styles.overlay}>
@@ -37,7 +33,6 @@ const WelcomeScreen= ()=> {
                 
             </ImageBackground>
         </SafeAreaView>
-	</>
     );
 };
 
@@ -45,6 +40,7 @@ const styles= StyleSheet.create({
 
     imageContainer:{
         flex: 1,
+        backgroundColor: '#1A3A5C'
     },
 
     image:{

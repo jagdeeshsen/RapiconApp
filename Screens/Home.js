@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, StatusBar, StyleSheet } from "react-native";
+import { ActivityIndicator, FlatList, StatusBar, StyleSheet, View } from "react-native";
 import ProductCard from "../Components/ProductCard";
 import ListHeader from "../Components/ListHeader";
 import { useEffect, useState } from "react";
@@ -38,25 +38,21 @@ const Home=()=>{
 
 
     return (
-	<>
-		{/* Top status bar background */}
-  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
-    			<StatusBar barStyle="light-content" />
-  		</SafeAreaView>
-
-        	<SafeAreaView edges = {[ 'left', 'right' ]} style={{ flex : 1, backgroundColor: '#F8F9FB', alignItems: 'center', justifyContent: 'center'}}>
-            	<FlatList 
-                	data={filteredDesigns}
-                	renderItem={({item})=>(<ProductCard item ={item}/>)}
-                	ListHeaderComponent={<ListHeader onSearch = {setSearchText}/>}
-                	keyExtractor={(item)=> item.id}
-                	numColumns={2}
-                	contentContainerStyle={{ padding: 8, marginBottom: 10, backgroundColor: '#F8F9FB'}}
-                	showsVerticalScrollIndicator={false}
-                	ListEmptyComponent={loading? <ActivityIndicator size='large' 					style={styles.activityIndicator}/> :<ErrorMessage textMessage= 'No product found. Please try again'/>}
-            	/>
-        	</SafeAreaView>
-	</>
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style={{flex:1, alignItems: 'center', backgroundColor: '#F8F9FB'}}>
+                <FlatList 
+                    data={filteredDesigns}
+                    renderItem={({item})=>(<ProductCard item ={item}/>)}
+                    ListHeaderComponent={<ListHeader onSearch = {setSearchText}/>}
+                    keyExtractor={(item)=> item.id}
+                    numColumns={2}
+                    contentContainerStyle={{padding: 8, backgroundColor: '#F8F9FB'}}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={loading? <ActivityIndicator size='large' style={styles.activityIndicator}/> :<ErrorMessage textMessage= 'No product found. Please try again'/>}
+                />
+            </View>
+        </SafeAreaView>
     );
 };
 

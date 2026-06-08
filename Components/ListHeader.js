@@ -1,14 +1,22 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import SearchBox from './SearchBox';
 import Slider from './Slider';
+import { useNavigation } from "@react-navigation/native";
 
 const ListHeader=({ onSearch })=>{
+
+    const navigation = useNavigation();
 
     return(
         <View style={styles.wrapperContainer}>
             <SearchBox onSearch={onSearch}/>
             <Slider></Slider>
-            <Text style={styles.productCardHeading}>Special For You</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                <Text style={styles.productCardHeading}>Special For You</Text>
+                <TouchableOpacity style={styles.seeAllText} onPress={()=> navigation.navigate('Home', { screen: 'AllProduct' })}>
+                    <Text>View all</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 };
@@ -16,42 +24,32 @@ const ListHeader=({ onSearch })=>{
 const styles= StyleSheet.create({
 
     wrapperContainer:{
-	
-        padding: 10,
+        padding: 8,
         backgroundColor: '#F8F9FB',
     },
 
-    mainContent:{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginTop: 10
+    bellImg:{
+        width: 30,
+        height: 30,
+        alignSelf: 'flex-end',
+        borderRadius: 30,
+        backgroundColor: 'gray',
+        elevation: 5
     },
 
-   userImg:{
-    height: 30,
-    width: 30,
-    alignSelf: 'flex-start',
-    borderRadius: 30,
-    backgroundColor: 'gray',
-    elevation: 5
-   },
-
-   bellImg:{
-    width: 30,
-    height: 30,
-    alignSelf: 'flex-end',
-    borderRadius: 30,
-    backgroundColor: 'gray',
-    elevation: 5
-   },
-
    productCardHeading:{
-    fontSize: 18,
-    marginTop: 20,
-    color: '#1A2233',
-    fontWeight: '700'
-   },
+        fontSize: 18,
+        marginTop: 20,
+        color: '#1A2233',
+        fontWeight: '700'
+    },
+
+    seeAllText:{
+        fontSize: 16,
+        marginTop: 20,
+        color: '#1A3A5C',
+        fontWeight: '600'
+    }
 
 });
 

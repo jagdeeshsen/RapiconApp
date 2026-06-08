@@ -231,26 +231,23 @@ const Cart=()=>{
 
 
     return (
-	<>
-		{/* Top status bar background */}
-  		<SafeAreaView edges = {['top']} style={{ backgroundColor: "#1A3A5C" }}>
-    			<StatusBar barStyle="light-content" />
-  		</SafeAreaView>
-        <SafeAreaView edges = {['left', 'right' ]} style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-            <FlatList
-                data={cartItems}
-                renderItem={({ item })=> <CartItemBox item={item} onDelete={()=>handleOnDelete(item.id)}/>}
-                keyExtractor={(item)=> item.id}
-                showsVerticalScrollIndicator={false}
-                ListHeaderComponent={<CartListHeader/>}
-                ListFooterComponent={<CartListFooter price={totalPrice} onCheckout= {handleFullCheckout} onInstallmentCheckout={handleInstallmentCheckout} paying={paying}/>}
-                contentContainerStyle={{padding: 8, backgroundColor: '#F8F9FB'}}
-                ListEmptyComponent={loading ? <ActivityIndicator size={24} color='#000'/>
-                                            : <ErrorMessage textMessage='Your cart is empty'/>
-                }
-            />
+        <SafeAreaView edges={['top']} style={{flex: 1, backgroundColor: '#1A3A5C'}}>
+            <StatusBar barStyle="light-content"/>
+            <View style={{flex:1, backgroundColor: '#F8F9FB'}}>
+                <CartListHeader/>
+                <FlatList
+                    data={cartItems}
+                    renderItem={({ item })=> <CartItemBox item={item} onDelete={()=>handleOnDelete(item.id)}/>}
+                    keyExtractor={(item)=> item.id}
+                    showsVerticalScrollIndicator={false}
+                    ListFooterComponent={<CartListFooter price={totalPrice} onCheckout= {handleFullCheckout} onInstallmentCheckout={handleInstallmentCheckout} paying={paying}/>}
+                    contentContainerStyle={{padding: 8, backgroundColor: '#F8F9FB'}}
+                    ListEmptyComponent={loading ? <ActivityIndicator size={24} color='#000'/>
+                                                : <ErrorMessage textMessage='Your cart is empty'/>
+                    }
+                />
+            </View>
         </SafeAreaView>
-	</>
     )
 };
 

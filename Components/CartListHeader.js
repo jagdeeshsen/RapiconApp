@@ -23,8 +23,8 @@ const styles= StyleSheet.create({
     wrapper:{
         width: '100%',
         height: 'auto',
-        padding: 18,
-        backgroundColor: '#F8F9FB',
+        padding: 15,
+        backgroundColor: '#FFFFFF',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',

@@ -178,21 +178,17 @@ const Order= ({ setIsLoggedIn})=>{
 
 
     return (
-	<>
-	<StatusBar barStyle = 'light-content' />
-	
-        <SafeAreaView edges = {[ 'left', 'right' ]} style={{flex: 1, backgroundColor: '#F8F9FB'}}>
+        <SafeAreaView edges={[]} style={{flex:1, backgroundColor: '#F8F9FB'}}>
+            <StatusBar barStyle="light-content"/>
             <FlatList
                 data={orders} 
                 renderItem={ ({ item }) => <OrderHistoryBox item={item} installmentCheckout = {handleInstallmentCheckout} payingId={payingId}/>}
                 keyExtractor={(item) => item.id}
                 showsVerticalScrollIndicator={false}
-                contentContainerStyle={{padding: 8}}
+                contentContainerStyle={{padding: 10}}
                 ListEmptyComponent={loading ? <ActivityIndicator size='large' style= {styles.activityIndicator}/> : <ErrorMessage textMessage='You have not placed any orders yet.'/>}>
             </FlatList>
         </SafeAreaView>
-	</>
-	
     );
 };
 
