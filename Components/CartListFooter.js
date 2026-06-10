@@ -1,9 +1,12 @@
 import { ActivityIndicator, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { useNavigation } from "@react-navigation/native";
 
 const CartListFooter=({ price, onCheckout, onInstallmentCheckout, paying })=>{
 
     let tax = (price*18)/100;
     let total= price + tax;
+    
+    const navigation= useNavigation();
 
     const formatePrice=(price)=>{
         return price.toLocaleString('en-IN');
@@ -63,7 +66,12 @@ const CartListFooter=({ price, onCheckout, onInstallmentCheckout, paying })=>{
                     : <Text style={styles.secondaryBtnText}>Pay Installment</Text>
                 }
             </TouchableOpacity>
-            <Text style={{fontSize: 16, color: '#6B7A99', marginBottom: 5}}>For cash on delivery. Please contact us.</Text>
+            <View style = {{flexDirection: 'row'}}>
+		<Text style={{fontSize: 16, color: '#6B7A99', marginBottom: 5}}>For Virtual Reality(VR) Experience. Please </Text>
+		<TouchableOpacity onPress = {()=> navigation.navigate('Account')}>
+			<Text style = {{fontSize: 16, colour: '#1A3A5C', fontWeight: '400'}}>Contact-us.</Text>
+		</TouchableOpacity>
+	   </View>
             <Text style={{fontSize: 12, color: '#6B7A99'}}>Note: Installment option allows you to pay in 10 monthly installments.</Text>
             
         </View>
@@ -147,7 +155,7 @@ const styles= StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
         borderRadius: 10,
-        marginBottom: 10,
+        marginBottom: 15,
         borderWidth: 1,
         borderColor: '#1A3A5C',
     },

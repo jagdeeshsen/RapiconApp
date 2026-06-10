@@ -12,7 +12,7 @@ const CartListHeader= ()=>{
                 <Ionicons name="chevron-back" size={22} color='#1A2233'/>
             </TouchableOpacity>
             <Text style={styles.headingText}>My Cart</Text>
-            <TouchableOpacity onPress={()=> navigation.navigate('Account', {screen:'My Order'})} style={styles.touchableOpacity}>
+            <TouchableOpacity onPress={()=> navigation.navigate('Account')} style={styles.touchableOpacity}>
                 <Ionicons name="bag-check-outline" size={24} color='#1A2233'/>
             </TouchableOpacity>
         </View>

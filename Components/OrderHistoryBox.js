@@ -6,6 +6,11 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
 
     const[expandedId, setExpandedId] = useState(null);
 
+    const sortedInstallments = item.installmentsList?.sort(
+  	(a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+    );
+
+
     const formatPrice =(price) => {
         return price.toLocaleString('en-IN');
     };
@@ -64,7 +69,7 @@ const OrderHistoryBox = ({ item, installmentCheckout, payingId }) => {
                         <Text style={styles.installmentHeading}>Amount</Text>
                     </View>
                     <View style={styles.line}/>
-                    { item.installmentsList?.map( (ins, index) => (
+                    { sortedInstallments?.map( (ins, index) => (
                         <View  key={ins.id.toString()} style={styles.installmentRow}>
                             <Text style={styles.fieldLable}>{index+1}</Text>
                             <Text style={styles.fieldValue}>{formatDate(ins.dueDate)} </Text>

@@ -73,8 +73,7 @@ const Account =({ setIsLoggedIn })=>{
         <SafeAreaView edges={['top']} style={styles.container}>
             <StatusBar barStyle="light-content"/>
             <View style={{flex: 1, backgroundColor: '#F8F9FB'}}>
-                <ScrollView style={{width: '100%'}}>
-                    <View style={styles.header}>
+		<View style={styles.header}>
                         <View style={{flexDirection: 'row'}}>
                             <View style={styles.avatar}>
                                 <Text style={styles.avatarText}>{getInitials()}</Text>
@@ -85,6 +84,8 @@ const Account =({ setIsLoggedIn })=>{
                             </View>
                         </View>
                     </View>
+                <ScrollView style={{width: '100%'}}>
+                    
                     <Text style={styles.heading}>ACCOUNT</Text>
                     <View>
                         <ProfileCategoryBox name ='My Profile' icon='person-circle-outline' onPress={()=> navigation.navigate('My Profile')}/>
@@ -94,14 +95,14 @@ const Account =({ setIsLoggedIn })=>{
 
                     <Text style={styles.heading}>PREFERENCES</Text>
                     <View>
-                        <ProfileCategoryBox name ='About us' icon='information-circle-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
-                        <ProfileCategoryBox name ='Our Services' icon='construct-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
+                        <ProfileCategoryBox name ='About us' icon='information-circle-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/about-us.html')}/>
+                        <ProfileCategoryBox name ='Our Services' icon='construct-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/about-us.html')}/>
                         <ProfileCategoryBox name ='Become a Seller' icon='storefront' onPress={() => Linking.openURL('https://rapiconinfra.com/vendor-landing.html')}/>
                     </View>
 
                     <Text style={styles.heading}>SUPPORT</Text>
                     <View style={styles.accountInfo}>
-                        <ProfileCategoryBox name ='Help Center' icon='help-circle-outline' onPress={() => navigation.navigate('Support')}/>
+                        <ProfileCategoryBox name ='Contact & Help Center' icon='help-circle-outline' onPress={() => navigation.navigate('Support')}/>
                         <ProfileCategoryBox name ='Terms & Conditions' icon='document-text-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/terms-privacy.html')}/>
                         <ProfileCategoryBox name ='Privacy Policy' icon='lock-closed-outline' onPress={() => Linking.openURL('https://rapiconinfra.com/privacy-policy.html')}/>
                     </View>

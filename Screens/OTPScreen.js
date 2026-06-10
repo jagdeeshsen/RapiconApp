@@ -92,11 +92,11 @@ const OTPScreen= ({ route, setIsLoggedIn })=> {
                 <View style={styles.backBtn}>
                     <CustomBackBtn screen='Sign In'/>
                 </View>
-                <Text style={styles.heading}>Varify OTP</Text>
+                <Text style={styles.heading}>Verify OTP</Text>
                 <Text style={styles.subHeading}>We’ve sent a one-time password to your{' '}
                     <Text style={{fontWeight: '600', color: '#1A3A5C'}}>{phone}</Text> {' '}number.</Text>
                 <Text style={styles.mainHeading}>OTP *</Text>
-                <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#ffffff'}]}>
+                <View style={[styles.inputContainer, {borderColor:  error ? 'red': '#FFFFFF'}]}>
                     <TextInput 
                         onChangeText= {(text)=> OnChangeText(text)} 
                         style={styles.input} 
@@ -161,6 +161,11 @@ const styles= StyleSheet.create({
     backBtn:{
         margin: 18,
         alignSelf: 'flex-start',
+    },
+
+    input:{
+        flex: 1,
+        height: 45,
     },
 
     heading:{

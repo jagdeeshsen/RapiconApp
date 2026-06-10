@@ -90,7 +90,7 @@ const Support = () => {
                             <TextInput
                                 value={form.name}
                                 placeholder="Enter name"
-                                keyboardType="text"
+                                keyboardType="default"
                                 onChangeText={(text) => handleOnChange('name', text)}
                                 style={styles.input}
                                 error = {errors.name}
@@ -115,7 +115,7 @@ const Support = () => {
                             <TextInput
                                 value={form.email}
                                 placeholder="Enter email"
-                                keyboardType="text"
+                                keyboardType="email-address"
                                 onChangeText={(text) => handleOnChange('email', text)}
                                 style={styles.input}
                                 error = {errors.email}
@@ -127,7 +127,7 @@ const Support = () => {
                             <TextInput
                                 value={form.message}
                                 placeholder="Enter message"
-                                keyboardType="text"
+                                keyboardType="default"
                                 onChangeText={(text) => handleOnChange('message', text)}
                                 style={styles.input}
                             />

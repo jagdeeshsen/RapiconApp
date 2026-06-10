@@ -49,10 +49,18 @@ target 'RapiconApp' do
      # Fix deployment target for all pods
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
+
       current = config.build_settings['IPHONEOS_DEPLOYMENT_TARGET']
       if current.to_f < 13.0
         config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
       end
+	
+	# Fix dSYM generation for Hermes & PhonePe (fixes your upload errors)
+        config.build_settings['DEBUG_INFORMATION_FORMAT'] = 'dwarf-with-dsym'
+
+        # Don't strip debug symbols in Release (needed for dSYM)
+        config.build_settings['STRIP_INSTALLED_PRODUCT'] = 'NO'
+        config.build_settings['COPY_PHASE_STRIP'] = 'NO'
     end
 
   end

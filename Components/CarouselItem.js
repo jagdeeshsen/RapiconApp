@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Dimensions, Image } from "react-native";
 
 const screenWidth= Dimensions.get('window').width;
@@ -6,13 +6,27 @@ const screenWidth= Dimensions.get('window').width;
 const CarouselItem= React.memo(({uri})=>{
     const[imgHeight, setImgHeight] = useState(320);
 
-    Image.getSize(uri, (width, height) => {
-        const ratio = height / width;
-        setImgHeight(screenWidth* ratio);
-    });
+    useEffect(() => {
+  Image.getSize(
+    uri,
+    (width, height) => {
+      const ratio = height / width;
+      setImgHeight(screenWidth * ratio);
+    },
+    () => {
+      setImgHeight(320); // fallback
+    }
+  );
+}, [uri]);
 
     return (
-        <Image source={{uri}} style={{width: screenWidth, height: imgHeight}}/>
+        <Image 
+		source={{uri}} 
+		resizeMode = 'cover'
+		style={{
+			width: screenWidth, 
+			height: imgHeight,
+		}}/>
     )
 });
 

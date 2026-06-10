@@ -28,7 +28,7 @@ const ImageCarousel=({ urls })=>{
                 initialNumToRender={3}
                 maxToRenderPerBatch={3}
                 windowSize={5}
-                removeClippedSubviews
+                
             />
             <View style={styles.dotsContainer}>
                 {urls.map((_, index ) => (
